@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { Module } from './module.entity';
 import { Challenge } from './challenge.entity';
-import { LessonStatusEnum, LessonStatus } from 'src/models';
+import { LessonStatus, LessonStatusEnum } from 'src/models/course-models';
 
 @Entity()
 export class Lesson {
