@@ -6,7 +6,7 @@ export class Course {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('jsonb') // Assuming this holds a localized string for multiple languages
+  @Column('jsonb') // Assuming this holds a localized string for multiple courses
   name: Record<string, string>;
 
   @Column('jsonb')
@@ -24,6 +24,6 @@ export class Course {
   @Column()
   updatedAt: Date;
 
-  @OneToMany(() => Section, (section) => section.language, { cascade: true })
+  @OneToMany(() => Section, (section) => section.course, { cascade: true })
   sections: Section[];
 }

@@ -1,1 +1,1 @@
-export * from './language-models';
+export * from './course-models';

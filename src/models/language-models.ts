@@ -11,9 +11,9 @@ export enum LessonStatusEnum {
   completed = 'completed',
 }
 
-export type LanguageBackground = LanguageHeaderBackgroundEnum;
+export type CourseBackground = CourseHeaderBackgroundEnum;
 
-export enum LanguageHeaderBackgroundEnum {
+export enum CourseHeaderBackgroundEnum {
   Pink = '#D81B60',
   LightBlue = '#1E3A8A',
   LightGreen = '#2F855A',

@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { Unit } from './unit.entity';
 import { Lesson } from './lesson.entity';
-import { LanguageHeaderBackgroundEnum } from 'src/models';
+import { CourseHeaderBackgroundEnum } from 'src/models';
 
 @Entity()
 export class Module {
@@ -31,9 +31,9 @@ export class Module {
 
   @Column({
     type: 'enum',
-    enum: LanguageHeaderBackgroundEnum,
+    enum: CourseHeaderBackgroundEnum,
   })
-  moduleColor: LanguageHeaderBackgroundEnum;
+  moduleColor: CourseHeaderBackgroundEnum;
 
   @ManyToOne(() => Unit, (unit) => unit.modules)
   unit: Unit;

@@ -16,8 +16,8 @@ export class Section {
   @Column('jsonb')
   name: Record<string, string>;
 
-  @ManyToOne(() => Course, (language) => language.sections)
-  language: Course;
+  @ManyToOne(() => Course, (course) => course.sections)
+  course: Course;
 
   @OneToMany(() => Unit, (unit) => unit.section, { cascade: true })
   units: Unit[];
