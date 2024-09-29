@@ -1,24 +1,19 @@
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { Module } from './module.entity';
-import { Challenge } from './challenge.entity';
-import { LessonStatus, LessonStatusEnum } from 'src/models/course-models';
+import { LessonStatus, LocalizedString, LessonStatusEnum } from "src/models/course-models";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
+import { Unit } from "./unit.entity";
+import { Challenge } from "./challenge.entity";
+
 
 @Entity()
 export class Lesson {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('jsonb')
-  name: Record<string, string>;
+  @Column("jsonb")
+  name: LocalizedString;
 
-  @Column('jsonb')
-  description: Record<string, string>;
+  @Column("jsonb")
+  description: LocalizedString;
 
   @Column({ nullable: true })
   imageUrl?: string;
@@ -26,20 +21,15 @@ export class Lesson {
   @Column({ nullable: true })
   icon?: string;
 
-  @Column('text')
-  content: string; // Could be expanded for multimedia
+  @Column("text")
+  content: string; // or JSON if multimedia content
 
-  @Column({
-    type: 'enum',
-    enum: LessonStatusEnum,
-  })
+  @Column({ type: "enum", enum: LessonStatusEnum })
   status: LessonStatus;
 
-  @ManyToOne(() => Module, (module) => module.lessons)
-  module: Module;
+  @ManyToOne(() => Unit, (unit) => unit.lessons)
+  unit: Unit;
 
-  @OneToMany(() => Challenge, (challenge) => challenge.lesson, {
-    cascade: true,
-  })
+  @OneToMany(() => Challenge, (challenge) => challenge.lesson, { cascade: true })
   challenges: Challenge[];
 }

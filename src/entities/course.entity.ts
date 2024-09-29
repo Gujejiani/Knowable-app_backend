@@ -1,16 +1,24 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Section } from './section.entity';
+import { LocalizedString } from 'src/models/course-models';
 
 @Entity()
 export class Course {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('jsonb') // Assuming this holds a localized string for multiple courses
-  name: Record<string, string>;
+  @Column("jsonb")
+  name: LocalizedString;
 
-  @Column('jsonb')
-  description: Record<string, string>;
+  @Column("jsonb")
+  description: LocalizedString;
 
   @Column({ nullable: true })
   imageUrl?: string;
@@ -18,10 +26,10 @@ export class Course {
   @Column({ nullable: true })
   icon?: string;
 
-  @Column()
+  @CreateDateColumn()
   createdAt: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updatedAt: Date;
 
   @OneToMany(() => Section, (section) => section.course, { cascade: true })

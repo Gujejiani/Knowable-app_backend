@@ -1,0 +1,8 @@
+# Ignore all TypeScript files
+*.ts
+
+# Or ignore specific directories
+src/
+
+# Ignore the entire app
+**/*

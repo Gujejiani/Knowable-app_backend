@@ -1,33 +1,39 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Lesson } from './lesson.entity';
-import { ChallengeStatus, ChallengeStatusEnum } from 'src/models';
+import { ChallengeStatus, ChallengeStatusEnum } from "src/models/course-models";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
+import { Lesson } from "./lesson.entity";
+import { Option } from "./options.entity";
+
+
 
 @Entity()
 export class Challenge {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column("text")
   name: string;
 
-  @Column()
+  @Column("text")
   description: string;
 
-  @Column()
-  type: 'task' | 'exam' | 'quiz' | 'insert-suggestion';
+  @Column({ type: "enum", enum: ["task", "exam", "quiz", "insert-suggestion"] })
+  type: string;
 
-  @Column('text')
-  content: string; // Could be expanded for multimedia
+  @Column("text")
+  content: string; // or multimedia content
 
-  @Column({
-    type: 'enum',
-    enum: ChallengeStatusEnum,
-  })
+  @Column({ nullable: true })
+  passingScore?: number;
+
+  @Column("text")
+  question: string;
+
+  @Column({ type: "enum", enum: ChallengeStatusEnum })
   status: ChallengeStatus;
 
   @ManyToOne(() => Lesson, (lesson) => lesson.challenges)
   lesson: Lesson;
 
-  @Column('jsonb')
-  options: { id: number; optionText: string; isCorrect: boolean }[];
+  @OneToMany(() => Option, (option) => option.challenge, { cascade: true })
+  options: Option[];
 }

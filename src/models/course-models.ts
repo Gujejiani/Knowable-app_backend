@@ -22,3 +22,9 @@ export enum CourseHeaderBackgroundEnum {
   Orange = '#D97706',
   Teal = '#2C7A7B',
 }
+
+export interface LocalizedString {
+  en: string;
+  es?: string;
+}
+
