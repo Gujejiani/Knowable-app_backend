@@ -5,9 +5,9 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Section } from '../../entities/section.entity';
+import { SectionEntity } from '../../entities/section.entity';
 import { LocalizedString } from 'src/models/course-models';
-import { UserProgress } from '../../entities/UserProgress.entity';
+import {  UserProgressEntity } from '../../entities/UserProgress.entity';
 import { AbstractEntity } from 'common/common';
 
 @Entity()
@@ -32,9 +32,9 @@ export class CourseEntity extends AbstractEntity<CourseEntity> {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @OneToMany(() => Section, (section) => section.course, { cascade: true })
-  sections: Section[];
+  @OneToMany(() => SectionEntity, (section) => section.course, { cascade: true })
+  sections: SectionEntity[];
 
-  @OneToMany(() => UserProgress, (progress) => progress.course)
-  userProgress: UserProgress[];
+  @OneToMany(() => UserProgressEntity, (progress) => progress.course)
+  userProgress: UserProgressEntity[];
 }

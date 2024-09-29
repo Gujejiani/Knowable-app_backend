@@ -1,11 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
-import { Lesson } from "./lesson.entity";
-import { Option } from "./options.entity";
+import { LessonEntity } from "./lesson.entity";
+import { OptionEntity } from "./options.entity";
 
 
 
 @Entity()
-export class Challenge {
+export class ChallengeEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -29,9 +29,9 @@ export class Challenge {
 
 
 
-  @ManyToOne(() => Lesson, (lesson) => lesson.challenges)
-  lesson: Lesson;
+  @ManyToOne(() => LessonEntity, (lesson) => lesson.challenges)
+  lesson: LessonEntity;
 
-  @OneToMany(() => Option, (option) => option.challenge, { cascade: true })
-  options: Option[];
+  @OneToMany(() => OptionEntity, (option) => option.challenge, { cascade: true })
+  options: OptionEntity[];
 }

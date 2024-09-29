@@ -1,30 +1,30 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { CourseEntity } from "../courses/entities/course.entity";
-import { User } from "./user.entity";
-import { Section } from "./section.entity";
-import { Unit } from "./unit.entity";
-import { Lesson } from "./lesson.entity";
+import { UserEntity } from "./user.entity";
+import { SectionEntity } from "./section.entity";
+import { UnitEntity } from "./unit.entity";
+import { LessonEntity } from "./lesson.entity";
 import { LessonStatus, LessonStatusEnum } from "src/models";
 
 @Entity()
-export class UserProgress {
+export class UserProgressEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => User, (user) => user.progress)
-    user: User;
+    @ManyToOne(() => UserEntity, (user) => user.progress)
+    user: UserEntity;
 
     @ManyToOne(() => CourseEntity, (course) => course.userProgress, { nullable: true })
     course: CourseEntity;
 
-    @ManyToOne(() => Section, (section) => section.userProgress, { nullable: true })
-    section: Section;
+    @ManyToOne(() => SectionEntity, (section) => section.userProgress, { nullable: true })
+    section: SectionEntity;
 
-    @ManyToOne(() => Unit, (unit) => unit.userProgress, { nullable: true })
-    unit: Unit;
+    @ManyToOne(() => UnitEntity, (unit) => unit.userProgress, { nullable: true })
+    unit: UnitEntity;
 
-    @ManyToOne(() => Lesson, (lesson) => lesson.userProgress, { nullable: true })
-    lesson: Lesson;
+    @ManyToOne(() => LessonEntity, (lesson) => lesson.userProgress, { nullable: true })
+    lesson: LessonEntity;
 
     @Column({ type: "enum", enum: LessonStatusEnum })
     status: LessonStatus;

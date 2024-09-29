@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { Challenge } from "./challenge.entity";
+import { ChallengeEntity } from "./challenge.entity";
 
 
 @Entity()
-export class Option {
+export class OptionEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -13,6 +13,6 @@ export class Option {
   @Column("boolean")
   isCorrect: boolean;
 
-  @ManyToOne(() => Challenge, (challenge) => challenge.options)
-  challenge: Challenge;
+  @ManyToOne(() => ChallengeEntity, (challenge) => challenge.options)
+  challenge: ChallengeEntity;
 }

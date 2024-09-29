@@ -1,12 +1,12 @@
 import { Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { UserProgress } from "./UserProgress.entity";
+import { UserProgressEntity } from "./UserProgress.entity";
 
 @Entity()
-export class User {
+export class UserEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
 
-    @OneToMany(() => UserProgress, (progress) => progress.user)
-    progress: UserProgress[];
+    @OneToMany(() => UserProgressEntity, (progress) => progress.user)
+    progress: UserProgressEntity[];
 }

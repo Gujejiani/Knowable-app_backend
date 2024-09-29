@@ -1,12 +1,12 @@
 import { CourseBackground, CourseHeaderBackgroundEnum, LocalizedString } from "src/models/course-models";
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
-import { Section } from "./section.entity";
-import { Lesson } from "./lesson.entity";
-import { UserProgress } from "./UserProgress.entity";
+import { SectionEntity } from "./section.entity";
+import { LessonEntity } from "./lesson.entity";
+import { UserProgressEntity } from "./UserProgress.entity";
 
 
 @Entity()
-export class Unit {
+export class UnitEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -28,12 +28,12 @@ export class Unit {
   @Column({ type: "enum", enum: CourseHeaderBackgroundEnum })
   unitColor: CourseBackground;
 
-  @ManyToOne(() => Section, (section) => section.units)
-  section: Section;
+  @ManyToOne(() => SectionEntity, (section) => section.units)
+  section: SectionEntity;
 
-  @OneToMany(() => Lesson, (lesson) => lesson.unit, { cascade: true })
-  lessons: Lesson[];
+  @OneToMany(() => LessonEntity, (lesson) => lesson.unit, { cascade: true })
+  lessons: LessonEntity[];
 
-  @OneToMany(() => UserProgress, (progress) => progress.unit)
-  userProgress: UserProgress[];
+  @OneToMany(() => UserProgressEntity, (progress) => progress.unit)
+  userProgress: UserProgressEntity[];
 }

@@ -1,12 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
 import { CourseEntity } from "../courses/entities/course.entity";
-import { Unit } from "./unit.entity";
+import { UnitEntity } from "./unit.entity";
 import { LocalizedString } from "src/models/course-models";
-import { UserProgress } from "./UserProgress.entity";
+import { UserProgressEntity } from "./UserProgress.entity";
 
 
 @Entity()
-export class Section {
+export class SectionEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -16,10 +16,10 @@ export class Section {
   @ManyToOne(() => CourseEntity, (course) => course.sections)
   course: CourseEntity;
 
-  @OneToMany(() => Unit, (unit) => unit.section, { cascade: true })
-  units: Unit[];
+  @OneToMany(() => UnitEntity, (unit) => unit.section, { cascade: true })
+  units: UnitEntity[];
 
 
-  @OneToMany(() => UserProgress, (progress) => progress.section)
-  userProgress: UserProgress[];
+  @OneToMany(() => UserProgressEntity, (progress) => progress.section)
+  userProgress: UserProgressEntity[];
 }

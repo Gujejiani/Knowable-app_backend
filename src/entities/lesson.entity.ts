@@ -1,12 +1,12 @@
 import {  LocalizedString } from "src/models/course-models";
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
-import { Unit } from "./unit.entity";
-import { Challenge } from "./challenge.entity";
-import { UserProgress } from "./UserProgress.entity";
+import { UnitEntity } from "./unit.entity";
+import { ChallengeEntity } from "./challenge.entity";
+import { UserProgressEntity } from "./UserProgress.entity";
 
 
 @Entity()
-export class Lesson {
+export class LessonEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -27,12 +27,12 @@ export class Lesson {
 
   
 
-  @ManyToOne(() => Unit, (unit) => unit.lessons)
-  unit: Unit;
+  @ManyToOne(() => UnitEntity, (unit) => unit.lessons)
+  unit: UnitEntity;
 
-  @OneToMany(() => Challenge, (challenge) => challenge.lesson, { cascade: true })
-  challenges: Challenge[];
+  @OneToMany(() => ChallengeEntity, (challenge) => challenge.lesson, { cascade: true })
+  challenges: ChallengeEntity[];
 
-  @OneToMany(() => UserProgress, (progress) => progress.lesson)
-  userProgress: UserProgress[];
+  @OneToMany(() => UserProgressEntity, (progress) => progress.lesson)
+  userProgress: UserProgressEntity[];
 }
