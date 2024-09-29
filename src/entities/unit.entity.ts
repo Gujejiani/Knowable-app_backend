@@ -2,6 +2,7 @@ import { CourseBackground, CourseHeaderBackgroundEnum, LocalizedString } from "s
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
 import { Section } from "./section.entity";
 import { Lesson } from "./lesson.entity";
+import { UserProgress } from "./UserProgress.entity";
 
 
 @Entity()
@@ -32,4 +33,7 @@ export class Unit {
 
   @OneToMany(() => Lesson, (lesson) => lesson.unit, { cascade: true })
   lessons: Lesson[];
+
+  @OneToMany(() => UserProgress, (progress) => progress.unit)
+  userProgress: UserProgress[];
 }

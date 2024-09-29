@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { Section } from './section.entity';
 import { LocalizedString } from 'src/models/course-models';
+import { UserProgress } from './UserProgress.entity';
 
 @Entity()
 export class Course {
@@ -34,4 +35,7 @@ export class Course {
 
   @OneToMany(() => Section, (section) => section.course, { cascade: true })
   sections: Section[];
+
+  @OneToMany(() => UserProgress, (progress) => progress.course)
+  userProgress: UserProgress[];
 }

@@ -1,9 +1,4 @@
-export type ChallengeStatus = 'locked' | 'unlocked' | 'completed';
-export enum ChallengeStatusEnum {
-  locked = 'locked',
-  unlocked = 'unlocked',
-  completed = 'completed',
-}
+
 export type LessonStatus = 'locked' | 'unlocked' | 'completed';
 export enum LessonStatusEnum {
   locked = 'locked',

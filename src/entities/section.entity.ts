@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "ty
 import { Course } from "./course.entity";
 import { Unit } from "./unit.entity";
 import { LocalizedString } from "src/models/course-models";
+import { UserProgress } from "./UserProgress.entity";
 
 
 @Entity()
@@ -17,4 +18,8 @@ export class Section {
 
   @OneToMany(() => Unit, (unit) => unit.section, { cascade: true })
   units: Unit[];
+
+
+  @OneToMany(() => UserProgress, (progress) => progress.section)
+  userProgress: UserProgress[];
 }

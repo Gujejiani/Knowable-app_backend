@@ -1,4 +1,3 @@
-import { ChallengeStatus, ChallengeStatusEnum } from "src/models/course-models";
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
 import { Lesson } from "./lesson.entity";
 import { Option } from "./options.entity";
@@ -28,8 +27,7 @@ export class Challenge {
   @Column("text")
   question: string;
 
-  @Column({ type: "enum", enum: ChallengeStatusEnum })
-  status: ChallengeStatus;
+
 
   @ManyToOne(() => Lesson, (lesson) => lesson.challenges)
   lesson: Lesson;
