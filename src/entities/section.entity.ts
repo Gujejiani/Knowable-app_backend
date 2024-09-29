@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
-import { Course } from "./course.entity";
+import { CourseEntity } from "../courses/entities/course.entity";
 import { Unit } from "./unit.entity";
 import { LocalizedString } from "src/models/course-models";
 import { UserProgress } from "./UserProgress.entity";
@@ -13,8 +13,8 @@ export class Section {
   @Column("jsonb")
   name: LocalizedString;
 
-  @ManyToOne(() => Course, (course) => course.sections)
-  course: Course;
+  @ManyToOne(() => CourseEntity, (course) => course.sections)
+  course: CourseEntity;
 
   @OneToMany(() => Unit, (unit) => unit.section, { cascade: true })
   units: Unit[];

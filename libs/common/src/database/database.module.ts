@@ -1,22 +1,26 @@
 import { Module } from '@nestjs/common';
 import { EntityClassOrSchema } from '@nestjs/typeorm/dist/interfaces/entity-class-or-schema.type';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigService } from '@nestjs/config';
 
 
 @Module({
     imports: [
 
-        TypeOrmModule.forRoot({
-            type: 'postgres',
-            host: 'localhost',
-            port: 5432,
-            username: 'postgres',
-            password: 'password',
-            database: 'postgres',
-            entities: [],
-            autoLoadEntities: true,
-
-        }),
+        TypeOrmModule.forRootAsync({
+            useFactory: (configService: ConfigService) => ({
+                type: 'postgres',
+                host: configService.getOrThrow('HOST'), // default PostgreSQL host
+                port: configService.getOrThrow('MYSQL_PORT'), // default PostgreSQL port
+                database: configService.getOrThrow('DATABASE'), // default PostgreSQL database
+                username: configService.getOrThrow('MYSQL_DATABASE'), // default PostgreSQL user
+                password: configService.getOrThrow('MYSQL_ROOT_PASSWORD'), // password set in Docker
+                synchronize: false,
+                autoLoadEntities: true,
+           }),
+           inject: [ConfigService],
+   
+       })
 
     ],
     providers: [],

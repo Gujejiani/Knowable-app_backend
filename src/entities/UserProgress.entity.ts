@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Course } from "./course.entity";
+import { CourseEntity } from "../courses/entities/course.entity";
 import { User } from "./user.entity";
 import { Section } from "./section.entity";
 import { Unit } from "./unit.entity";
@@ -14,8 +14,8 @@ export class UserProgress {
     @ManyToOne(() => User, (user) => user.progress)
     user: User;
 
-    @ManyToOne(() => Course, (course) => course.userProgress, { nullable: true })
-    course: Course;
+    @ManyToOne(() => CourseEntity, (course) => course.userProgress, { nullable: true })
+    course: CourseEntity;
 
     @ManyToOne(() => Section, (section) => section.userProgress, { nullable: true })
     section: Section;

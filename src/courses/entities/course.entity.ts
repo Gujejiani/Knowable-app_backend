@@ -1,19 +1,18 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
   OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Section } from './section.entity';
+import { Section } from '../../entities/section.entity';
 import { LocalizedString } from 'src/models/course-models';
-import { UserProgress } from './UserProgress.entity';
+import { UserProgress } from '../../entities/UserProgress.entity';
+import { AbstractEntity } from 'common/common';
 
 @Entity()
-export class Course {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class CourseEntity extends AbstractEntity<CourseEntity> {
+
 
   @Column("jsonb")
   name: LocalizedString;
