@@ -15,8 +15,9 @@ import { ConfigService } from '@nestjs/config';
                 database: configService.getOrThrow('DATABASE'), // default PostgreSQL database
                 username: configService.getOrThrow('MYSQL_DATABASE'), // default PostgreSQL user
                 password: configService.getOrThrow('MYSQL_ROOT_PASSWORD'), // password set in Docker
-                synchronize: false,
                 autoLoadEntities: true,
+                synchronize:  configService.getOrThrow('MYSQL_SYNCHRONIZE') === 'true',
+
            }),
            inject: [ConfigService],
    

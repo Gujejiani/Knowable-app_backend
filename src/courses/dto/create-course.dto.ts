@@ -6,8 +6,7 @@ import { LocalizedString } from 'src/models';
 export class CreateCourseDto {
 
 
-    @IsNotEmpty()
-    id: number;
+  
   
     @IsJSON()
     @IsNotEmpty()
@@ -32,3 +31,4 @@ export class CreateCourseDto {
     updatedAt?: Date;
 
 }
+
