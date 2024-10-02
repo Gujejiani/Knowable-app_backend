@@ -1,6 +1,5 @@
 
-export type LessonStatus = 'locked' | 'unlocked' | 'completed';
-export enum LessonStatusEnum {
+export enum IStatusEnum {
   locked = 'locked',
   unlocked = 'unlocked',
   completed = 'completed',

@@ -4,7 +4,7 @@ import { UserEntity } from "./user.entity";
 import { SectionEntity } from "./section.entity";
 import { UnitEntity } from "./unit.entity";
 import { LessonEntity } from "./lesson.entity";
-import { LessonStatus, LessonStatusEnum } from "src/models";
+import { IStatusEnum } from "src/models";
 
 @Entity()
 export class UserProgressEntity {
@@ -26,8 +26,8 @@ export class UserProgressEntity {
     @ManyToOne(() => LessonEntity, (lesson) => lesson.userProgress, { nullable: true })
     lesson: LessonEntity;
 
-    @Column({ type: "enum", enum: LessonStatusEnum })
-    status: LessonStatus;
+    @Column({ type: "enum", enum: IStatusEnum, default: IStatusEnum.locked })
+    status: IStatusEnum;
 
     @Column("int", { array: true, default: () => "'{}'" }) // This creates an integer array
     completedChallenges: number[]; // Array of completed challenge IDs
