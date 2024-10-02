@@ -9,7 +9,7 @@ async function bootstrap() {
     .setTitle('Courses API')
     .setDescription('Knowable api endpoints')
     .setVersion('1.0')
-    .addTag('learning')
+    .addTag('knowable')
     .build();
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('api', app, document);
