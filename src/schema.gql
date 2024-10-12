@@ -1,0 +1,144 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserEntity {
+  id: ID!
+  username: String!
+  email: String!
+  progress: [UserProgressEntity!]
+}
+
+type OptionEntity {
+  id: ID!
+  optionText: String!
+  isCorrect: Boolean!
+  challenge: ChallengeEntity!
+}
+
+type ChallengeEntity {
+  id: ID!
+  name: String!
+  description: String!
+  type: String!
+  content: String!
+  passingScore: Float
+  question: String!
+  lesson: LessonEntity!
+  options: [OptionEntity!]
+}
+
+type LessonEntity {
+  id: ID!
+  name: String!
+  description: String!
+  imageUrl: String
+  icon: String
+  content: String!
+  unit: UnitEntity!
+  challenges: [ChallengeEntity!]
+  userProgress: [UserProgressEntity!]
+}
+
+type SectionEntity {
+  id: ID!
+  name: String!
+  course: CourseEntity!
+  units: [UnitEntity!]
+  userProgress: [UserProgressEntity!]
+}
+
+type UnitEntity {
+  id: ID!
+  name: String!
+  description: String!
+  imageUrl: String
+  icon: String
+  count: Float!
+  unitColor: CourseHeaderBackgroundEnum!
+  section: SectionEntity!
+  lessons: [LessonEntity!]
+  userProgress: [UserProgressEntity!]
+}
+
+"""Enum that represents the background color options for units"""
+enum CourseHeaderBackgroundEnum {
+  Pink
+  LightBlue
+  LightGreen
+  LightCoral
+  Purple
+  Orange
+  Teal
+}
+
+type UserProgressEntity {
+  id: ID!
+  user: UserEntity!
+  course: CourseEntity
+  section: SectionEntity
+  unit: UnitEntity
+  lesson: LessonEntity
+  status: IStatusEnum!
+  completedChallenges: [Float!]
+  unlockedAt: DateTime
+  completedAt: DateTime
+}
+
+"""Enum that represents the status of a user progress"""
+enum IStatusEnum {
+  locked
+  unlocked
+  completed
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type CourseEntity {
+  id: ID!
+  name: String!
+  description: String!
+  imageUrl: String
+  icon: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  sections: [SectionEntity!]
+  userProgress: [UserProgressEntity!]
+}
+
+type Query {
+  sections: [SectionEntity!]!
+  section(id: Int!): SectionEntity!
+}
+
+type Mutation {
+  createSection(createSectionInput: CreateSectionInput!): SectionEntity!
+  updateSection(updateSectionInput: UpdateSectionInput!): SectionEntity!
+  removeSection(id: Int!): SectionEntity!
+}
+
+input CreateSectionInput {
+  name: JSONObject!
+  courseId: Float!
+  units: [UnitInput!]
+}
+
+"""
+The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSONObject
+
+input UnitInput {
+  title: String!
+  lessons: [String!]
+}
+
+input UpdateSectionInput {
+  id: Float
+  name: JSONObject
+  courseId: Float
+  units: [UnitInput!]
+}

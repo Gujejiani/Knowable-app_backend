@@ -1,12 +1,23 @@
-import { Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { UserProgressEntity } from "./UserProgress.entity";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { UserProgressEntity } from './UserProgress.entity';
 
 @Entity()
+@ObjectType() // This decorator is crucial for making this class available to the GraphQL schema
 export class UserEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  @Field(() => ID)
+  id: number;
 
+  @Column()
+  @Field(() => String)
+  username: string;
 
-    @OneToMany(() => UserProgressEntity, (progress) => progress.user)
-    progress: UserProgressEntity[];
+  @Column()
+  @Field(() => String)
+  email: string;
+
+  @OneToMany(() => UserProgressEntity, (progress) => progress.user)
+  @Field(() => [UserProgressEntity], { nullable: true })
+  progress: UserProgressEntity[];
 }
