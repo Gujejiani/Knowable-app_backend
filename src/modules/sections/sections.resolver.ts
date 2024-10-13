@@ -9,7 +9,11 @@ export class SectionsResolver {
   constructor(private readonly sectionsService: SectionsService) {}
 
   @Mutation(() => SectionEntity)
-  createSection(@Args('createSectionInput') createSectionInput: CreateSectionInput) {
+  async createSection(@Args('createSectionInput') createSectionInput: CreateSectionInput) {
+    console.log('Received createSectionInput:', createSectionInput);
+    if (!createSectionInput) {
+      throw new Error("createSectionInput is missing");
+    }
     return this.sectionsService.create(createSectionInput);
   }
 

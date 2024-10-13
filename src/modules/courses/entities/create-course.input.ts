@@ -1,0 +1,18 @@
+import { InputType, Field } from '@nestjs/graphql';
+import {  LocalizedStringInput } from 'src/models/course-models';
+
+@InputType()
+export class CreateCourseInput {
+  @Field(() => LocalizedStringInput)
+  name: LocalizedStringInput;
+
+  @Field(() => LocalizedStringInput)
+  description: LocalizedStringInput;
+
+  @Field(() => String, { nullable: true })
+  imageUrl?: string;
+
+  @Field(() => String, { nullable: true })
+  icon?: string;
+}
+

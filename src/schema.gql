@@ -2,6 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type LocalizedStringGraphQL {
+  en: String!
+  es: String
+}
+
 type UserEntity {
   id: ID!
   username: String!
@@ -42,16 +47,11 @@ type LessonEntity {
 
 type SectionEntity {
   id: ID!
-  name: JSONObject!
+  name: LocalizedStringGraphQL!
   course: CourseEntity!
   units: [UnitEntity!]
   userProgress: [UserProgressEntity!]
 }
-
-"""
-The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
-"""
-scalar JSONObject
 
 type UnitEntity {
   id: ID!
@@ -104,8 +104,8 @@ scalar DateTime
 
 type CourseEntity {
   id: ID!
-  name: String!
-  description: String!
+  name: LocalizedStringGraphQL!
+  description: LocalizedStringGraphQL!
   imageUrl: String
   icon: String
   createdAt: DateTime!
@@ -115,19 +115,35 @@ type CourseEntity {
 }
 
 type Query {
+  courses: [CourseEntity!]!
+  course(id: Int!): CourseEntity!
   sections: [SectionEntity!]!
   section(id: Int!): SectionEntity!
 }
 
 type Mutation {
-  createSection(createSectionInput: CreateSectionInput!): SectionEntity!
+  createCourse(createCourseInput: CreateCourseInput!): CourseEntity!
   updateSection(updateSectionInput: UpdateSectionInput!): SectionEntity!
   removeSection(id: Int!): SectionEntity!
+  createSection(createSectionInput: CreateSectionInput!): SectionEntity!
 }
 
-input CreateSectionInput {
-  name: JSONObject!
-  courseId: Float!
+input CreateCourseInput {
+  name: LocalizedStringInput!
+  description: LocalizedStringInput!
+  imageUrl: String
+  icon: String
+}
+
+input LocalizedStringInput {
+  en: String!
+  es: String
+}
+
+input UpdateSectionInput {
+  id: Float
+  name: LocalizedStringInput
+  courseId: Float
   units: [UnitInput!]
 }
 
@@ -136,9 +152,8 @@ input UnitInput {
   lessons: [String!]
 }
 
-input UpdateSectionInput {
-  id: Float
-  name: JSONObject
-  courseId: Float
+input CreateSectionInput {
+  name: LocalizedStringInput!
+  courseId: Float!
   units: [UnitInput!]
 }
