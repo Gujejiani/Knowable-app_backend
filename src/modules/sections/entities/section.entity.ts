@@ -1,10 +1,11 @@
-import { Entity, Column, ManyToOne, OneToMany } from "typeorm";
+import { Entity, Column, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { CourseEntity } from "../../courses/entities/course.entity";
 import { UnitEntity } from "../../../entities/unit.entity";
 import { LocalizedString } from "src/models/course-models";
 import { UserProgressEntity } from "../../../entities/UserProgress.entity";
-import { Field, ObjectType } from "@nestjs/graphql";
+import { Field, ID, ObjectType } from "@nestjs/graphql";
 import { AbstractEntity } from "common/common";
+import { GraphQLJSONObject } from "graphql-type-json";
 
 
 @Entity()
@@ -12,9 +13,12 @@ import { AbstractEntity } from "common/common";
 
 export class SectionEntity extends AbstractEntity<SectionEntity> {
 
+  @PrimaryGeneratedColumn()
+  @Field(() => ID) // Ensure this decorator is present
+  id: number;
 
   @Column("jsonb")
-  @Field(() => String) // Adjust type if necessary
+  @Field(() => GraphQLJSONObject) // Adjust type if necessary
   name: LocalizedString;
 
   @ManyToOne(() => CourseEntity, (course) => course.sections)
