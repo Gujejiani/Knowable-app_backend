@@ -1,8 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
 import { CourseEntity } from "../../courses/entities/course.entity";
-import { UnitEntity } from "../../entities/unit.entity";
+import { UnitEntity } from "../../../entities/unit.entity";
 import { LocalizedString } from "src/models/course-models";
-import { UserProgressEntity } from "../../entities/UserProgress.entity";
+import { UserProgressEntity } from "../../../entities/UserProgress.entity";
 import { Field, ID, ObjectType } from "@nestjs/graphql";
 
 

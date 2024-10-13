@@ -1,6 +1,6 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { GraphQLJSONObject } from 'graphql-type-json';
-import { CourseEntity } from 'src/courses/entities/course.entity';
+import { CourseEntity } from 'src/modules/courses/entities/course.entity';
 import { UnitEntity } from 'src/entities/unit.entity';
 import { UserProgressEntity } from 'src/entities/UserProgress.entity';
 

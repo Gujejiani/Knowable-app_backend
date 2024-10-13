@@ -1,11 +1,11 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { CourseEntity } from "../courses/entities/course.entity";
+import { CourseEntity } from "../modules/courses/entities/course.entity";
 import { UserEntity } from "./user.entity";
 import { UnitEntity } from "./unit.entity";
 import { LessonEntity } from "./lesson.entity";
 import { IStatusEnum } from "src/models";
-import { SectionEntity } from "../sections/entities/section.entity";
+import { SectionEntity } from "../modules/sections/entities/section.entity";
 
 @Entity()
 @ObjectType()

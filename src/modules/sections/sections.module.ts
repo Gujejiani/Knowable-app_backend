@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { SectionsService } from './sections.service';
 import { SectionsResolver } from './sections.resolver';
 import { SectionsRepository } from './sections.repository';
-import { CoursesModule } from 'src/courses/courses.module';
+import { CoursesModule } from 'src/modules/courses/courses.module';
 import { DatabaseModule } from 'common/common/database/database.module';
 import { UnitEntity } from 'src/entities/unit.entity';
 import { UserProgressEntity } from 'src/entities/UserProgress.entity';

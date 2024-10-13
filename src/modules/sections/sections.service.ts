@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateSectionInput } from './dto/create-section.input';
 import { UpdateSectionInput } from './dto/update-section.input';
 import { SectionsRepository } from './sections.repository';
-import { CoursesService } from 'src/courses/courses.service';
+import { CoursesService } from 'src/modules/courses/courses.service';
 import { SectionEntity } from './entities/section.entity';
 
 @Injectable()

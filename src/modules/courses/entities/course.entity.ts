@@ -7,9 +7,9 @@ import {
 } from 'typeorm';
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { LocalizedString } from 'src/models/course-models';
-import { UserProgressEntity } from '../../entities/UserProgress.entity';
+import { UserProgressEntity } from '../../../entities/UserProgress.entity';
 import { AbstractEntity } from 'common/common';
-import { SectionEntity } from 'src/sections/entities/section.entity';
+import { SectionEntity } from 'src/modules/sections/entities/section.entity';
 
 @Entity()
 @ObjectType()

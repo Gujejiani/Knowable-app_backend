@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CoursesModule } from './courses/courses.module';
+import { CoursesModule } from './modules/courses/courses.module';
 import { ConfigModule } from '@nestjs/config';
-import { SectionsModule } from './sections/sections.module';
+import { SectionsModule } from './modules/sections/sections.module';
 import { DatabaseModule } from 'common/common/database/database.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
