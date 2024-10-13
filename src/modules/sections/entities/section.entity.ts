@@ -1,18 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
+import { Entity, Column, ManyToOne, OneToMany } from "typeorm";
 import { CourseEntity } from "../../courses/entities/course.entity";
 import { UnitEntity } from "../../../entities/unit.entity";
 import { LocalizedString } from "src/models/course-models";
 import { UserProgressEntity } from "../../../entities/UserProgress.entity";
-import { Field, ID, ObjectType } from "@nestjs/graphql";
+import { Field, ObjectType } from "@nestjs/graphql";
+import { AbstractEntity } from "common/common";
 
 
 @Entity()
 @ObjectType() // Add this decorator to make it a GraphQL output type
 
-export class SectionEntity {
-  @PrimaryGeneratedColumn()
-  @Field(() => ID)
-  id: number;
+export class SectionEntity extends AbstractEntity<SectionEntity> {
+
 
   @Column("jsonb")
   @Field(() => String) // Adjust type if necessary

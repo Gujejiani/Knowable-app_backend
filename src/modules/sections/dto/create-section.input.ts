@@ -1,10 +1,11 @@
 import { InputType,  Field } from '@nestjs/graphql';
 import { GraphQLJSONObject } from 'graphql-type-json'; // Import GraphQL JSON type
+import { LocalizedString } from 'src/models';
 
 @InputType()
 export class CreateSectionInput {
   @Field(() => GraphQLJSONObject)
-  name: Record<string, string>; // Matches the LocalizedString type
+  name: LocalizedString; // Matches the LocalizedString type (assuming it is represented as a JSON object)
 
   @Field()
   courseId: number;

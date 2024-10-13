@@ -4,10 +4,11 @@ import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { LessonEntity } from "./lesson.entity";
 import { UserProgressEntity } from "./UserProgress.entity";
 import { SectionEntity } from "../modules/sections/entities/section.entity";
+import { AbstractEntity } from "common/common";
 
 @Entity()
 @ObjectType()
-export class UnitEntity {
+export class UnitEntity extends AbstractEntity<UnitEntity> {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
   id: number;

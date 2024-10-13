@@ -11,18 +11,31 @@ export class SectionsService {
   constructor(private readonly sectionsRepository: SectionsRepository, private courseService: CoursesService){}
  async create(createSectionInput: CreateSectionInput) {
 
-      const sectionEntity = new SectionEntity();
-      const course = await this.courseService.findOne(createSectionInput.courseId);
+  const course = await this.courseService.findOne(createSectionInput.courseId);
+  if (!course) {
+    throw new Error('Course not found');
+  }
 
-      sectionEntity.name.en = createSectionInput.name.en;
-      sectionEntity.name.es = createSectionInput.name?.es;
-      sectionEntity.course = course;
+  // Create SectionEntity with the given input and course association
+  const sectionEntity = new SectionEntity({
+    name: createSectionInput.name,
+    course,
+  });
 
+  // Assign units if provided
+  if (createSectionInput.units) {
+    // const units = createSectionInput.units.map(unitInput => {
+    //   return new UnitEntity({
+    //     ...unitInput,
+    //     section: sectionEntity, // Associate the unit with the new section
+    //   });
+    // });
+    // sectionEntity.units = units;
+  }
 
+  // Save the entity to persist in the database
+  return await this.sectionsRepository.create(sectionEntity);
 
-
-
-    return  this.sectionsRepository.create(sectionEntity);
   }
 
   findAll() {

@@ -41,7 +41,6 @@ type LessonEntity {
 }
 
 type SectionEntity {
-  id: ID!
   name: String!
   course: CourseEntity!
   units: [UnitEntity!]
