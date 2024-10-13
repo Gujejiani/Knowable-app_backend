@@ -4,12 +4,13 @@ import { UpdateSectionInput } from './dto/update-section.input';
 import { SectionsRepository } from './sections.repository';
 import { CoursesService } from 'src/modules/courses/courses.service';
 import { SectionEntity } from './entities/section.entity';
+import { CreateSectionRestDto } from './dto/rest-dto/createSectionDto';
 
 @Injectable()
 export class SectionsService {
 
   constructor(private readonly sectionsRepository: SectionsRepository, private courseService: CoursesService){}
- async create(createSectionInput: CreateSectionInput) {
+ async create(createSectionInput: CreateSectionInput | CreateSectionRestDto) {
 
   const course = await this.courseService.findOne(createSectionInput.courseId);
   if (!course) {

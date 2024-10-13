@@ -1,8 +1,8 @@
 import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { SectionsService } from './sections.service';
-import { CreateSectionInput } from './dto/create-section.input';
-import { UpdateSectionInput } from './dto/update-section.input';
+import { CreateSectionRestDto } from './dto/rest-dto/createSectionDto';
+import { UpdateSectionDto } from './dto/rest-dto/updateSectionDto';
 
 @ApiTags('sections')
 @Controller('sections')
@@ -23,14 +23,14 @@ export class SectionsController {
 
   @Post()
   @ApiOperation({ summary: 'Create a new section' })
-  create(@Body() createSectionInput: CreateSectionInput) {
-    return this.sectionsService.create(createSectionInput);
+  create(@Body() createSectionDto: CreateSectionRestDto) {
+    return this.sectionsService.create(createSectionDto);
   }
 
   @Put(':id')
   @ApiOperation({ summary: 'Update a section by id' })
-  update(@Param('id') id: string, @Body() updateSectionInput: UpdateSectionInput) {
-    return this.sectionsService.update(+id, updateSectionInput);
+  update(@Param('id') id: string, @Body() updateSectionDto: UpdateSectionDto) {
+    return this.sectionsService.update(+id, updateSectionDto);
   }
 
   @Delete(':id')

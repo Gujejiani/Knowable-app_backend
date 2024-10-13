@@ -1,6 +1,7 @@
 import { GraphQLJSONObject } from 'graphql-type-json';
 import { InputType, Field,  } from '@nestjs/graphql';
 import { UnitInput } from './create-section.input';
+import { LocalizedString } from 'src/models';
 
 @InputType()
 export class UpdateSectionInput {
@@ -8,7 +9,7 @@ export class UpdateSectionInput {
   id?: number;
 
   @Field(() => GraphQLJSONObject, { nullable: true })
-  name?: Record<string, string>;
+  name?: LocalizedString;
 
   @Field({ nullable: true })
   courseId?: number;

@@ -1,5 +1,5 @@
 
-import { IsJSON, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsObject, IsNotEmpty, IsOptional, IsString, } from 'class-validator';
 import { LocalizedString } from 'src/models';
 
 
@@ -8,11 +8,11 @@ export class CreateCourseDto {
 
   
   
-    @IsJSON()
+    @IsObject()
     @IsNotEmpty()
     name: LocalizedString;
   
-    @IsJSON()
+    @IsObject()
     @IsOptional()
     description?: LocalizedString;
   
