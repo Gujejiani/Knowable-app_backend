@@ -5,7 +5,7 @@ import { UserEntity } from "./user.entity";
 import { UnitEntity } from "./unit.entity";
 import { LessonEntity } from "./lesson.entity";
 import { IStatusEnum } from "src/models";
-import { SectionEntity } from "./section.entity";
+import { SectionEntity } from "../sections/entities/section.entity";
 
 @Entity()
 @ObjectType()

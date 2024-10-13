@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "ty
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { LessonEntity } from "./lesson.entity";
 import { UserProgressEntity } from "./UserProgress.entity";
-import { SectionEntity } from "./section.entity";
+import { SectionEntity } from "../sections/entities/section.entity";
 
 @Entity()
 @ObjectType()

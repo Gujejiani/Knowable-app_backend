@@ -2,7 +2,7 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { SectionsService } from './sections.service';
 import { CreateSectionInput } from './dto/create-section.input';
 import { UpdateSectionInput } from './dto/update-section.input';
-import { SectionEntity } from 'src/entities/section.entity';
+import { SectionEntity } from './entities/section.entity';
 
 @Resolver(() => SectionEntity)
 export class SectionsResolver {

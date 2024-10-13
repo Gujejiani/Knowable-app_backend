@@ -2,7 +2,7 @@ import { AbstractRepository } from "common/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { EntityManager } from "typeorm";
 import { Injectable, Logger } from "@nestjs/common";
-import { SectionEntity } from "src/entities/section.entity";
+import { SectionEntity } from "./entities/section.entity";
 
 
 

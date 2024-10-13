@@ -3,7 +3,7 @@ import { CreateSectionInput } from './dto/create-section.input';
 import { UpdateSectionInput } from './dto/update-section.input';
 import { SectionsRepository } from './sections.repository';
 import { CoursesService } from 'src/courses/courses.service';
-import { SectionEntity } from 'src/entities/section.entity';
+import { SectionEntity } from './entities/section.entity';
 
 @Injectable()
 export class SectionsService {
