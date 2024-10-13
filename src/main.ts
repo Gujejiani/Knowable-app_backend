@@ -20,6 +20,9 @@ async function bootstrap() {
     whitelist: true, // Removes properties that do not have decorators in DTOs
     forbidNonWhitelisted: true, // Throws error if a non-whitelisted property is provided
     transform: true, // Automatically transforms payloads to be instances of DTO classes
+  
+    // todo
+    disableErrorMessages: false, // Disables the default error messages
   }));
   // TODO
   app.enableCors();
