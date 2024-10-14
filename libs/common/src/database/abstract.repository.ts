@@ -30,9 +30,9 @@ export abstract class AbstractRepository<T extends AbstractEntity<T>> {
         async findOne(where: FindOptionsWhere<T>, relations?: FindOptionsRelations<T> ): Promise<T> {
             const entity = await this.entityRepository.findOne({ where, relations });
 
-            if(!entity){
-                throw new NotFoundException('Entity not found')
-            }
+            // if(!entity){
+            //     throw new NotFoundException('Entity not found')
+            // }
 
             
 

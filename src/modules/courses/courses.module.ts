@@ -16,6 +16,6 @@ import { CoursesResolver } from './courses.resolver';
     ]),
    
   ],
-  exports: [CoursesService, CoursesRepository]
+  exports: [ ]
 })
 export class CoursesModule {}

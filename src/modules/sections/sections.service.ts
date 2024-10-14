@@ -2,20 +2,20 @@ import { Injectable } from '@nestjs/common';
 import { CreateSectionInput } from './dto/create-section.input';
 import { UpdateSectionInput } from './dto/update-section.input';
 import { SectionsRepository } from './sections.repository';
-import { CoursesService } from 'src/modules/courses/courses.service';
 import { SectionEntity } from './entities/section.entity';
 import { CreateSectionRestDto } from './dto/rest-dto/createSectionDto';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 
 @Injectable()
 export class SectionsService {
 
-  constructor(private readonly sectionsRepository: SectionsRepository, private courseService: CoursesService){}
+  constructor(private readonly sectionsRepository: SectionsRepository, private readonly eventEmitter: EventEmitter2){}
 
 
   async create(createSectionInput: CreateSectionInput | CreateSectionRestDto) {
 
-  const course = await this.courseService.findOne(createSectionInput.courseId);
-  if (!course) {
+  const courseExist = await this.checkCourseExist(createSectionInput.courseId);
+  if (!courseExist) {
     throw new Error('Course not found');
   }
 
@@ -42,9 +42,13 @@ export class SectionsService {
 
     updatedSectionEntity.name.en = updateSectionInput.name.en;
     updatedSectionEntity.name.es = updateSectionInput.name?.es;
-    const course = await this.courseService.findOne(updateSectionInput.courseId);
+    const course = await this.checkCourseExist(updateSectionInput.courseId);
 
-    updatedSectionEntity.course = course;
+    if (!course) {
+      throw new Error('Course not found');
+    }
+
+    updatedSectionEntity.courseId =  updateSectionInput.courseId;
 
 
 
@@ -57,5 +61,12 @@ export class SectionsService {
   remove(id: number) {
     return this.sectionsRepository.findOneAndDelete({ id});
     // return this.sectionsRepository.
+  }
+
+
+  checkCourseExist(courseId: number): Promise<boolean> {
+  return   new Promise<boolean>((resolve, )=>{
+      this.eventEmitter.emit('course.exists.check', courseId, resolve);
+   })
   }
 }

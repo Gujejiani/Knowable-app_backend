@@ -3,6 +3,7 @@ import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { CoursesRepository } from './course.repository';
 import { CourseEntity } from './entities/course.entity';
+import { OnEvent } from '@nestjs/event-emitter';
 
 @Injectable()
 export class CoursesService {
@@ -30,5 +31,13 @@ export class CoursesService {
 
   remove(id: number) {
     return this.courseRepository.findOneAndDelete({ id});
+  }
+
+  @OnEvent('course.exists.check')
+  async handleCourseExistsCheck(courseId: number, resolve: (exists: boolean) => void) {
+    const course = await this.courseRepository.findOne({ id: courseId });
+
+    console.log('course exists:', !!course);
+    resolve(!!course);
   }
 }
