@@ -4,17 +4,17 @@ import { UpdateSectionInput } from './dto/update-section.input';
 import { SectionsRepository } from './sections.repository';
 import { SectionEntity } from './entities/section.entity';
 import { CreateSectionRestDto } from './dto/rest-dto/createSectionDto';
-import { EventEmitter2 } from '@nestjs/event-emitter';
+import { EventEmitterService } from 'src/events/event-emiter.service';
 
 @Injectable()
 export class SectionsService {
 
-  constructor(private readonly sectionsRepository: SectionsRepository, private readonly eventEmitter: EventEmitter2){}
+  constructor(private readonly sectionsRepository: SectionsRepository, private readonly eventEmitterService: EventEmitterService){}
 
 
   async create(createSectionInput: CreateSectionInput | CreateSectionRestDto) {
 
-  const courseExist = await this.checkCourseExist(createSectionInput.courseId);
+  const courseExist = await this.eventEmitterService.checkCourseExist(createSectionInput.courseId);
   if (!courseExist) {
     throw new Error('Course not found');
   }
@@ -42,7 +42,7 @@ export class SectionsService {
 
     updatedSectionEntity.name.en = updateSectionInput.name.en;
     updatedSectionEntity.name.es = updateSectionInput.name?.es;
-    const course = await this.checkCourseExist(updateSectionInput.courseId);
+    const course = await this.eventEmitterService.checkCourseExist(updateSectionInput.courseId);
 
     if (!course) {
       throw new Error('Course not found');
@@ -64,9 +64,5 @@ export class SectionsService {
   }
 
 
-  checkCourseExist(courseId: number): Promise<boolean> {
-  return   new Promise<boolean>((resolve, )=>{
-      this.eventEmitter.emit('course.exists.check', courseId, resolve);
-   })
-  }
+  
 }

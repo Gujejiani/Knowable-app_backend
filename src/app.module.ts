@@ -9,7 +9,6 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { LoggingMiddleware } from './middlewares/logging.middleware';
-import { EventEmitterModule } from '@nestjs/event-emitter';
 @Module({
   imports: [
     CoursesModule,
@@ -25,7 +24,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
       envFilePath: '.env', // You can specify the path to your .env file
     }),
 
-    EventEmitterModule.forRoot()
+    
   ],
   controllers: [AppController],
   providers: [AppService],

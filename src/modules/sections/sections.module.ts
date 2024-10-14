@@ -12,12 +12,13 @@ import { OptionEntity } from 'src/entities/options.entity';
 import { UserEntity } from 'src/entities/user.entity';
 import { SectionsController } from './sections.controller';
 import { SectionEntity } from './entities/section.entity';
+import { EventEmittersModule } from 'src/events/event-emmiters.module';
 
 @Module({
   controllers: [SectionsController],
   providers: [SectionsResolver, SectionsService, SectionsRepository],
   imports: [
-  
+    EventEmittersModule.register('courses'),
     DatabaseModule.forFeature([
       SectionEntity,
       UnitEntity,
