@@ -48,6 +48,7 @@ type LessonEntity {
 type SectionEntity {
   id: ID!
   name: LocalizedStringGraphQL!
+  courseId: Float!
   course: CourseEntity!
   units: [UnitEntity!]
   userProgress: [UserProgressEntity!]

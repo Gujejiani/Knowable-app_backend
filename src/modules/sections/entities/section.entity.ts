@@ -20,6 +20,11 @@ export class SectionEntity extends AbstractEntity<SectionEntity> {
   @Field(() => LocalizedStringGraphQL) // Adjust type if necessary
   name: LocalizedStringGraphQL;
 
+
+  @Column({nullable: true})
+  @Field()
+  courseId: number; // Store only the courseId in the SectionEntity table
+
   @ManyToOne(() => CourseEntity, (course) => course.sections)
   @Field(() => CourseEntity)
   course: CourseEntity;

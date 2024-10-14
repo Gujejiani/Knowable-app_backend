@@ -10,7 +10,9 @@ import { CreateSectionRestDto } from './dto/rest-dto/createSectionDto';
 export class SectionsService {
 
   constructor(private readonly sectionsRepository: SectionsRepository, private courseService: CoursesService){}
- async create(createSectionInput: CreateSectionInput | CreateSectionRestDto) {
+
+
+  async create(createSectionInput: CreateSectionInput | CreateSectionRestDto) {
 
   const course = await this.courseService.findOne(createSectionInput.courseId);
   if (!course) {
@@ -20,21 +22,8 @@ export class SectionsService {
   // Create SectionEntity with the given input and course association
   const sectionEntity = new SectionEntity({
     name: createSectionInput.name,
-    course,
+    courseId: createSectionInput.courseId,
   });
-
-  // Assign units if provided
-  if (createSectionInput.units) {
-    // const units = createSectionInput.units.map(unitInput => {
-    //   return new UnitEntity({
-    //     ...unitInput,
-    //     section: sectionEntity, // Associate the unit with the new section
-    //   });
-    // });
-    // sectionEntity.units = units;
-  }
-
-  // Save the entity to persist in the database
   return await this.sectionsRepository.create(sectionEntity);
 
   }
