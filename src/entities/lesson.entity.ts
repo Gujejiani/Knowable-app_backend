@@ -1,9 +1,9 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { UnitEntity } from "./unit.entity";
 import { ChallengeEntity } from "./challenge.entity";
 import { LocalizedString } from "src/models/course-models";
 import { UserProgressEntity } from "./UserProgress.entity";
+import { UnitEntity } from "src/modules/units/entities/unit.entity";
 
 @Entity()
 @ObjectType()

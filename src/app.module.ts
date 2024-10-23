@@ -9,10 +9,12 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { LoggingMiddleware } from './middlewares/logging.middleware';
+import { UnitsModule } from './modules/units/units.module';
 @Module({
   imports: [
     CoursesModule,
     SectionsModule,
+    UnitsModule,
     DatabaseModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,

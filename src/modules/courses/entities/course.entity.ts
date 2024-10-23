@@ -43,6 +43,10 @@ export class CourseEntity extends AbstractEntity<CourseEntity> {
   @Field(() => Date)
   updatedAt: Date;
 
+  @Column({nullable: true})
+  @Field()
+  sectionId: number;
+
   @OneToMany(() => SectionEntity, (section) => section.course, { cascade: true, eager: true })
   @Field(() => [SectionEntity], { nullable: true })
   sections: SectionEntity[];

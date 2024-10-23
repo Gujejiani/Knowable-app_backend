@@ -1,10 +1,11 @@
-import { CourseBackground, CourseHeaderBackgroundEnum, LocalizedString } from "src/models/course-models";
+import { CourseBackground, CourseHeaderBackgroundEnum, LocalizedStringGraphQL } from "src/models/course-models";
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { LessonEntity } from "./lesson.entity";
-import { UserProgressEntity } from "./UserProgress.entity";
-import { SectionEntity } from "../modules/sections/entities/section.entity";
+
 import { AbstractEntity } from "common/common";
+import { SectionEntity } from "src/modules/sections/entities/section.entity";
+import { LessonEntity } from "src/entities/lesson.entity";
+import { UserProgressEntity } from "src/entities/UserProgress.entity";
 
 @Entity()
 @ObjectType()
@@ -14,12 +15,12 @@ export class UnitEntity extends AbstractEntity<UnitEntity> {
   id: number;
 
   @Column("jsonb")
-  @Field(() => String)
-  name: LocalizedString;
+  @Field(() => LocalizedStringGraphQL)
+  name: LocalizedStringGraphQL;
 
   @Column("jsonb")
-  @Field(() => String)
-  description: LocalizedString;
+  @Field(() => LocalizedStringGraphQL)
+  description: LocalizedStringGraphQL;
 
   @Column({ nullable: true })
   @Field(() => String, { nullable: true })
@@ -48,4 +49,9 @@ export class UnitEntity extends AbstractEntity<UnitEntity> {
   @OneToMany(() => UserProgressEntity, (progress) => progress.unit)
   @Field(() => [UserProgressEntity], { nullable: true })
   userProgress: UserProgressEntity[];
+
+
+  @Column({nullable: true})
+  @Field()
+  sectionId: number;
 }

@@ -4,7 +4,6 @@ import { SectionsResolver } from './sections.resolver';
 import { SectionsRepository } from './sections.repository';
 import { CoursesModule } from 'src/modules/courses/courses.module';
 import { DatabaseModule } from 'common/common/database/database.module';
-import { UnitEntity } from 'src/entities/unit.entity';
 import { UserProgressEntity } from 'src/entities/UserProgress.entity';
 import { LessonEntity } from 'src/entities/lesson.entity';
 import { ChallengeEntity } from 'src/entities/challenge.entity';
@@ -21,7 +20,6 @@ import { EventEmittersModule } from 'src/events/event-emmiters.module';
     EventEmittersModule.register('courses'),
     DatabaseModule.forFeature([
       SectionEntity,
-      UnitEntity,
       UserProgressEntity,
       LessonEntity,
       ChallengeEntity,

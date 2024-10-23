@@ -33,18 +33,6 @@ type ChallengeEntity {
   options: [OptionEntity!]
 }
 
-type LessonEntity {
-  id: ID!
-  name: String!
-  description: String!
-  imageUrl: String
-  icon: String
-  content: String!
-  unit: UnitEntity!
-  challenges: [ChallengeEntity!]
-  userProgress: [UserProgressEntity!]
-}
-
 type SectionEntity {
   id: ID!
   name: LocalizedStringGraphQL!
@@ -56,8 +44,8 @@ type SectionEntity {
 
 type UnitEntity {
   id: ID!
-  name: String!
-  description: String!
+  name: LocalizedStringGraphQL!
+  description: LocalizedStringGraphQL!
   imageUrl: String
   icon: String
   count: Float!
@@ -65,6 +53,7 @@ type UnitEntity {
   section: SectionEntity!
   lessons: [LessonEntity!]
   userProgress: [UserProgressEntity!]
+  sectionId: Float!
 }
 
 """Enum that represents the background color options for units"""
@@ -76,6 +65,18 @@ enum CourseHeaderBackgroundEnum {
   Purple
   Orange
   Teal
+}
+
+type LessonEntity {
+  id: ID!
+  name: String!
+  description: String!
+  imageUrl: String
+  icon: String
+  content: String!
+  unit: UnitEntity!
+  challenges: [ChallengeEntity!]
+  userProgress: [UserProgressEntity!]
 }
 
 type UserProgressEntity {
@@ -111,6 +112,7 @@ type CourseEntity {
   icon: String
   createdAt: DateTime!
   updatedAt: DateTime!
+  sectionId: Float!
   sections: [SectionEntity!]
   userProgress: [UserProgressEntity!]
 }
@@ -120,6 +122,8 @@ type Query {
   course(id: Int!): CourseEntity!
   sections: [SectionEntity!]!
   section(id: Int!): SectionEntity!
+  units: [UnitEntity!]!
+  unit(id: Int!): UnitEntity!
 }
 
 type Mutation {
@@ -127,6 +131,9 @@ type Mutation {
   updateSection(updateSectionInput: UpdateSectionInput!): SectionEntity!
   removeSection(id: Int!): SectionEntity!
   createSection(createSectionInput: CreateSectionInput!): SectionEntity!
+  createUnit(createUnitInput: CreateUnitInput!): UnitEntity!
+  updateUnit(updateUnitInput: UpdateUnitInput!): UnitEntity!
+  removeUnit(id: Int!): UnitEntity!
 }
 
 input CreateCourseInput {
@@ -157,4 +164,25 @@ input CreateSectionInput {
   name: LocalizedStringInput!
   courseId: Float!
   units: [UnitInput!]
+}
+
+input CreateUnitInput {
+  name: LocalizedStringInput!
+  description: LocalizedStringInput!
+  imageUrl: String
+  icon: String
+  count: Float!
+  unitColor: CourseHeaderBackgroundEnum!
+  sectionId: Float!
+}
+
+input UpdateUnitInput {
+  id: Float
+  name: LocalizedStringInput
+  description: LocalizedStringInput
+  imageUrl: String
+  icon: String
+  count: Float
+  unitColor: CourseHeaderBackgroundEnum
+  sectionId: Float
 }
