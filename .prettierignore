@@ -6,3 +6,14 @@ src/
 
 # Ignore the entire app
 **/*
+
+
+node_modules
+
+dist
+
+*.min.js
+
+*.min.css
+
+*.min.html
