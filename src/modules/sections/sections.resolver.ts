@@ -6,6 +6,7 @@ import { SectionEntity } from './entities/section.entity';
 
 @Resolver(() => SectionEntity)
 export class SectionsResolver {
+  
   constructor(private readonly sectionsService: SectionsService) {}
 
   @Mutation(() => SectionEntity)
