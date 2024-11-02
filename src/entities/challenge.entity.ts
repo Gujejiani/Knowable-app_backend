@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { LessonEntity } from "./lesson.entity";
+import { LessonEntity } from "../modules/lessons/entities/lesson.entity";
 import { OptionEntity } from "./options.entity";
 
 @Entity()

@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { CourseEntity } from "../modules/courses/entities/course.entity";
 import { UserEntity } from "./user.entity";
-import { LessonEntity } from "./lesson.entity";
+import { LessonEntity } from "../modules/lessons/entities/lesson.entity";
 import { IStatusEnum } from "src/models";
 import { SectionEntity } from "../modules/sections/entities/section.entity";
 import { UnitEntity } from "src/modules/units/entities/unit.entity";
