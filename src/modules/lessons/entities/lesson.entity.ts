@@ -2,12 +2,12 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, OneToMany } from "ty
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { ChallengeEntity } from "../../../entities/challenge.entity";
 import { LocalizedString } from "src/models/course-models";
-import { UserProgressEntity } from "../../../entities/UserProgress.entity";
 import { UnitEntity } from "src/modules/units/entities/unit.entity";
+import { AbstractEntity } from "common/common";
 
 @Entity()
 @ObjectType()
-export class LessonEntity {
+export class LessonEntity extends AbstractEntity<LessonEntity>  {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
   id: number;
@@ -40,7 +40,4 @@ export class LessonEntity {
   @Field(() => [ChallengeEntity], { nullable: true })
   challenges: ChallengeEntity[];
 
-  @OneToMany(() => UserProgressEntity, (progress) => progress.lesson)
-  @Field(() => [UserProgressEntity], { nullable: true })
-  userProgress: UserProgressEntity[];
 }

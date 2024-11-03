@@ -1,26 +1,49 @@
 import { Injectable } from '@nestjs/common';
-import { CreateLessonInput } from './dto/create-lesson.input';
 import { UpdateLessonInput } from './dto/update-lesson.input';
+import { LessonRepository } from './lesson.repository';
+import {  LessonEntity, } from './entities/lesson.entity';
+import { CreateLessonDto } from './dto/rest-dto/create-lesson.dto';
+import { CreateLessonInput } from './dto/create-lesson.input';
+import { UpdateLessonDto } from './dto/rest-dto/update-lesson.dto';
 
 @Injectable()
 export class LessonsService {
-  create(createLessonInput: CreateLessonInput) {
-    return 'This action adds a new lesson';
+  constructor(private readonly lessonRepository: LessonRepository){}
+
+  
+  create(createLessonDto: CreateLessonInput) {
+    const lessonEntity = new LessonEntity(createLessonDto);
+
+    return  this.lessonRepository.create(lessonEntity);
+  }
+  
+  createRest(createLessonDto: CreateLessonDto) {
+    const lessonEntity = new LessonEntity(createLessonDto);
+
+    return  this.lessonRepository.create(lessonEntity)
   }
 
   findAll() {
-    return `This action returns all lessons`;
+    return this.lessonRepository.find({});
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} lesson`;
+    return this.lessonRepository.findOne({ id: id });
   }
 
   update(id: number, updateLessonInput: UpdateLessonInput) {
-    return `This action updates a #${id} lesson`;
+    return this.lessonRepository.findOneAndUpdate({id: id}, 
+      updateLessonInput
+    );
+  }
+
+  updateRest(id: number, updateLessonInput: UpdateLessonDto) {
+    return this.lessonRepository.findOneAndUpdate({id: id}, 
+      updateLessonInput
+    );
   }
 
   remove(id: number) {
-    return `This action removes a #${id} lesson`;
+    return this.lessonRepository.findOneAndDelete({ id});
   }
 }

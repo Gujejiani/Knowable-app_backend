@@ -5,7 +5,6 @@ import { SectionsRepository } from './sections.repository';
 import { CoursesModule } from 'src/modules/courses/courses.module';
 import { DatabaseModule } from 'common/common/database/database.module';
 import { UserProgressEntity } from 'src/entities/UserProgress.entity';
-import { LessonEntity } from 'src/entities/lesson.entity';
 import { ChallengeEntity } from 'src/entities/challenge.entity';
 import { OptionEntity } from 'src/entities/options.entity';
 import { UserEntity } from 'src/entities/user.entity';
@@ -21,7 +20,6 @@ import { EventEmittersModule } from 'src/events/event-emmiters.module';
     DatabaseModule.forFeature([
       SectionEntity,
       UserProgressEntity,
-      LessonEntity,
       ChallengeEntity,
       OptionEntity,
       UserEntity

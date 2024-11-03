@@ -4,8 +4,7 @@ import { ObjectType, Field, ID } from '@nestjs/graphql';
 
 import { AbstractEntity } from "common/common";
 import { SectionEntity } from "src/modules/sections/entities/section.entity";
-import { LessonEntity } from "src/entities/lesson.entity";
-import { UserProgressEntity } from "src/entities/UserProgress.entity";
+import { LessonEntity } from "src/modules/lessons/entities/lesson.entity";
 
 @Entity()
 @ObjectType()
@@ -46,9 +45,7 @@ export class UnitEntity extends AbstractEntity<UnitEntity> {
   @Field(() => [LessonEntity], { nullable: true })
   lessons: LessonEntity[];
 
-  @OneToMany(() => UserProgressEntity, (progress) => progress.unit)
-  @Field(() => [UserProgressEntity], { nullable: true })
-  userProgress: UserProgressEntity[];
+
 
 
   @Column({nullable: true})

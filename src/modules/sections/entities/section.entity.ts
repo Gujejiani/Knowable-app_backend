@@ -33,8 +33,6 @@ export class SectionEntity extends AbstractEntity<SectionEntity> {
   units: UnitEntity[];
 
 
-  @OneToMany(() => UserProgressEntity, (progress) => progress.section)
-  @Field(() => [UserProgressEntity], { nullable: true })
 
   userProgress: UserProgressEntity[];
 }

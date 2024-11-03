@@ -10,12 +10,14 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { LoggingMiddleware } from './middlewares/logging.middleware';
 import { UnitsModule } from './modules/units/units.module';
+import { LessonsModule } from './modules/lessons/lessons.module';
 @Module({
   imports: [
+    DatabaseModule,
     CoursesModule,
     SectionsModule,
     UnitsModule,
-    DatabaseModule,
+    LessonsModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),

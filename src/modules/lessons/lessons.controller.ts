@@ -1,38 +1,38 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 
-import { ApiTags } from '@nestjs/swagger';  // Import ApiTags decorator
-import { CreateCourseDto } from '../courses/dto/create-course.dto';
-import { CoursesService } from '../courses/courses.service';
-import { UpdateCourseDto } from '../courses/dto/update-course.dto';
+import { ApiTags } from '@nestjs/swagger'; 
+import { CreateLessonDto } from './dto/rest-dto/create-lesson.dto';
+import { LessonsService } from './lessons.service';
+import { UpdateLessonDto } from './dto/rest-dto/update-lesson.dto';
 
 
-ApiTags('Lesson Controller')  // Add ApiTags decorator
-@Controller('courses')
-export class CoursesController {
-  constructor(private readonly coursesService: CoursesService) {}
+ApiTags('Lesson Controller') 
+@Controller('lessons')
+export class LessonsController {
+  constructor(private readonly lessonService: LessonsService) {}
 
   @Post()
-  create(@Body() createCourseDto: CreateCourseDto) {
-    return this.coursesService.create(createCourseDto);
+  create(@Body() createLessonDto: CreateLessonDto) {
+    return this.lessonService.createRest(createLessonDto);
   }
 
   @Get()
   findAll() {
-    return this.coursesService.findAll();
+    return this.lessonService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.coursesService.findOne(+id);
+    return this.lessonService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCourseDto: UpdateCourseDto) {
-    return this.coursesService.update(+id, updateCourseDto);
+  update(@Param('id') id: string, @Body() updateLessonDto: UpdateLessonDto) {
+    return this.lessonService.updateRest(+id, updateLessonDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.coursesService.remove(+id);
+    return this.lessonService.remove(+id);
   }
 }

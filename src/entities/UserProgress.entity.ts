@@ -1,11 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { CourseEntity } from "../modules/courses/entities/course.entity";
 import { UserEntity } from "./user.entity";
-import { LessonEntity } from "../modules/lessons/entities/lesson.entity";
-import { IStatusEnum } from "src/models";
-import { SectionEntity } from "../modules/sections/entities/section.entity";
-import { UnitEntity } from "src/modules/units/entities/unit.entity";
+import { CourseEntity } from "../modules/courses/entities/course.entity";
 
 @Entity()
 @ObjectType()
@@ -18,35 +14,19 @@ export class UserProgressEntity {
     @Field(() => UserEntity)
     user: UserEntity;
 
-    @ManyToOne(() => CourseEntity, (course) => course.userProgress, { nullable: true })
-    @Field(() => CourseEntity, { nullable: true })
+    @ManyToOne(() => CourseEntity, (course) => course.userProgress)
+    @Field(() => CourseEntity)
     course: CourseEntity;
-
-    @ManyToOne(() => SectionEntity, (section) => section.userProgress, { nullable: true })
-    @Field(() => SectionEntity, { nullable: true })
-    section: SectionEntity;
-
-    @ManyToOne(() => UnitEntity, (unit) => unit.userProgress, { nullable: true })
-    @Field(() => UnitEntity, { nullable: true })
-    unit: UnitEntity;
-
-    @ManyToOne(() => LessonEntity, (lesson) => lesson.userProgress, { nullable: true })
-    @Field(() => LessonEntity, { nullable: true })
-    lesson: LessonEntity;
-
-    @Column({ type: "enum", enum: IStatusEnum, default: IStatusEnum.locked })
-    @Field(() => IStatusEnum)
-    status: IStatusEnum;
 
     @Column("int", { array: true, default: () => "'{}'" })
     @Field(() => [Number], { nullable: true })
-    completedChallenges: number[]; // Array of completed challenge IDs
+    unlockedSections: number[];
 
-    @Column({ type: 'timestamp', nullable: true })
-    @Field(() => Date, { nullable: true })
-    unlockedAt: Date;
+    @Column("int", { array: true, default: () => "'{}'" })
+    @Field(() => [Number], { nullable: true })
+    unlockedUnits: number[];
 
-    @Column({ type: 'timestamp', nullable: true })
-    @Field(() => Date, { nullable: true })
-    completedAt: Date;
+    @Column("int", { array: true, default: () => "'{}'" })
+    @Field(() => [Number], { nullable: true })
+    completedLessons: number[];
 }
