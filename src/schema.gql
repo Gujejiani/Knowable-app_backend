@@ -44,8 +44,8 @@ type ChallengeEntity {
 
 type LessonEntity {
   id: ID!
-  name: String!
-  description: String!
+  name: LocalizedStringGraphQL!
+  description: LocalizedStringGraphQL!
   imageUrl: String
   icon: String
   content: String!
@@ -93,7 +93,6 @@ type CourseEntity {
   icon: String
   createdAt: DateTime!
   updatedAt: DateTime!
-  sectionId: Float!
   sections: [SectionEntity!]
   userProgress: [UserProgressEntity!]
 }

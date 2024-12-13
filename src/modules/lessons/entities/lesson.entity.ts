@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { ChallengeEntity } from "../../../entities/challenge.entity";
-import { LocalizedString } from "src/models/course-models";
+import { LocalizedStringGraphQL } from "src/models/course-models";
 import { UnitEntity } from "src/modules/units/entities/unit.entity";
 import { AbstractEntity } from "common/common";
 
@@ -13,12 +13,12 @@ export class LessonEntity extends AbstractEntity<LessonEntity>  {
   id: number;
 
   @Column("jsonb")
-  @Field(() => String)
-  name: LocalizedString;
+  @Field(() => LocalizedStringGraphQL)
+  name: LocalizedStringGraphQL;
 
   @Column("jsonb")
-  @Field(() => String)
-  description: LocalizedString;
+  @Field(() => LocalizedStringGraphQL)
+  description: LocalizedStringGraphQL;
 
   @Column({ nullable: true })
   @Field(() => String, { nullable: true })
@@ -28,7 +28,7 @@ export class LessonEntity extends AbstractEntity<LessonEntity>  {
   @Field(() => String, { nullable: true })
   icon?: string;
 
-  @Column("text")
+  @Column("text", {nullable: true})
   @Field(() => String)
   content: string; // or JSON if multimedia content
 
