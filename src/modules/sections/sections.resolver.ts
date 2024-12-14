@@ -20,7 +20,7 @@ export class SectionsResolver {
 
   @Query(() => [SectionEntity], { name: 'sections' })
   findAll() {
-    return this.sectionsService.findAll();
+    return this.sectionsService.findAll({units: true});
   }
 
   @Query(() => SectionEntity, { name: 'section' })

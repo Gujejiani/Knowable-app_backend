@@ -51,6 +51,7 @@ type LessonEntity {
   content: String!
   unit: UnitEntity!
   challenges: [ChallengeEntity!]
+  unitId: Float!
 }
 
 type UnitEntity {
@@ -167,7 +168,6 @@ input CreateUnitInput {
 }
 
 input UpdateUnitInput {
-  id: Float
   name: LocalizedStringInput
   description: LocalizedStringInput
   imageUrl: String
@@ -175,6 +175,7 @@ input UpdateUnitInput {
   count: Float
   unitColor: CourseHeaderBackgroundEnum
   sectionId: Float
+  id: Float
 }
 
 input CreateLessonInput {
@@ -184,6 +185,7 @@ input CreateLessonInput {
   icon: String
   createdAt: DateTime
   updatedAt: DateTime
+  unitId: Float
 }
 
 input UpdateLessonInput {
@@ -193,5 +195,6 @@ input UpdateLessonInput {
   icon: String
   createdAt: DateTime
   updatedAt: DateTime
+  unitId: Float
   id: Float!
 }

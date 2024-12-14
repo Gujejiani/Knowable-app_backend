@@ -15,7 +15,7 @@ export class UnitsResolver {
 
   @Query(() => [UnitEntity], { name: 'units' })
   findAll() {
-    return this.unitsService.findAll();
+    return this.unitsService.findAll({lessons: true});
   }
 
   @Query(() => UnitEntity, { name: 'unit' })

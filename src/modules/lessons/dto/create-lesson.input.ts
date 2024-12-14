@@ -31,4 +31,9 @@ export class CreateLessonInput {
   @Field(() => Date, { nullable: true })
   @IsOptional()
   updatedAt?: Date;
+
+
+  @Field({ nullable: true })
+  @IsOptional()
+  unitId?: number;
 }

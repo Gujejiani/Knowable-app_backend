@@ -5,6 +5,7 @@ import { SectionsRepository } from './sections.repository';
 import { SectionEntity } from './entities/section.entity';
 import { CreateSectionRestDto } from './dto/rest-dto/createSectionDto';
 import { EventEmitterService } from 'src/events/event-emiter.service';
+import { FindOptionsRelations } from 'typeorm';
 
 @Injectable()
 export class SectionsService {
@@ -28,8 +29,8 @@ export class SectionsService {
 
   }
 
-  findAll() {
-    return  this.sectionsRepository.find({});
+  findAll(relations?: FindOptionsRelations<SectionEntity>) {
+    return  this.sectionsRepository.find({}, relations);
   }
 
   findOne(id: number) {

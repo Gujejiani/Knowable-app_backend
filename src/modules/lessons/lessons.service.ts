@@ -30,7 +30,7 @@ export class LessonsService {
   findOne(id: number) {
     return this.lessonRepository.findOne({ id: id });
   }
-
+  
   update(id: number, updateLessonInput: UpdateLessonInput) {
     return this.lessonRepository.findOneAndUpdate({id: id}, 
       updateLessonInput

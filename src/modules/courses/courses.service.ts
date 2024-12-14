@@ -1,4 +1,4 @@
-import {  Injectable } from '@nestjs/common';
+import {  Injectable, Logger } from '@nestjs/common';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { CoursesRepository } from './course.repository';
 import { CourseEntity } from './entities/course.entity';
@@ -8,6 +8,7 @@ import { CreateCourseDto } from './dto/create-course.dto';
 @Injectable()
 export class CoursesService {
 
+  readonly logger = new Logger(CoursesService.name)
   constructor(private readonly courseRepository: CoursesRepository){}
   create(createCourseDto: CreateCourseDto) {
 
@@ -15,8 +16,18 @@ export class CoursesService {
     return this.courseRepository.create(courseEntity)
   }
 
-  findAll() {
-    return this.courseRepository.find({});
+ async  findAll(loadRelations = true) {
+    const relations = loadRelations
+      ? { sections: { units: { lessons: true } } }
+      : {};
+  
+    try {
+      return await this.courseRepository.find({}, relations);
+    } catch (error) {
+      // Handle or log the error
+      this.logger.error('Error fetching courses:', error);
+      throw new Error('Could not fetch courses');
+    }
   }
 
   findOne(id: number) {

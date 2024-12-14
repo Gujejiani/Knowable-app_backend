@@ -28,7 +28,7 @@ export class SectionEntity extends AbstractEntity<SectionEntity> {
   @Field(() => CourseEntity)
   course: CourseEntity;
 
-  @OneToMany(() => UnitEntity, (unit) => unit.section, { cascade: true, eager: true })
+  @OneToMany(() => UnitEntity, (unit) => unit.section, { cascade: true })
   @Field(() => [UnitEntity], { nullable: true })
   units: UnitEntity[];
 

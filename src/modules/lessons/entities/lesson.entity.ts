@@ -40,4 +40,9 @@ export class LessonEntity extends AbstractEntity<LessonEntity>  {
   @Field(() => [ChallengeEntity], { nullable: true })
   challenges: ChallengeEntity[];
 
+
+  @Column({nullable: true})
+  @Field()
+  unitId: number;
+
 }
