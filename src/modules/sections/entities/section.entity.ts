@@ -19,16 +19,16 @@ export class SectionEntity extends AbstractEntity<SectionEntity> {
   @Field(() => LocalizedStringGraphQL) // Adjust type if necessary
   name: LocalizedStringGraphQL;
 
-
+  // todo dublication needs removal
   @Column({nullable: true})
   @Field()
-  courseId: number; // Store only the courseId in the SectionEntity table
+  courseId: number; 
 
   @ManyToOne(() => CourseEntity, (course) => course.sections)
   @Field(() => CourseEntity)
   course: CourseEntity;
 
-  @OneToMany(() => UnitEntity, (unit) => unit.section, { cascade: true })
+  @OneToMany(() => UnitEntity, (unit) => unit.section, { cascade: true, eager: true })
   @Field(() => [UnitEntity], { nullable: true })
   units: UnitEntity[];
 

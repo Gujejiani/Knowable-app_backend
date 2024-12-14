@@ -193,5 +193,5 @@ input UpdateLessonInput {
   icon: String
   createdAt: DateTime
   updatedAt: DateTime
-  id: Int!
+  id: Float!
 }
