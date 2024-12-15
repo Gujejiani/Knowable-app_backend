@@ -1,6 +1,6 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { ChallengeEntity } from "./challenge.entity";
+import { ChallengeEntity } from "../modules/challenges/entities/challenge.entity";
 
 
 @Entity()

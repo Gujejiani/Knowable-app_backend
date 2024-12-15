@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { ChallengeEntity } from "../../../entities/challenge.entity";
+import { ChallengeEntity } from "../../challenges/entities/challenge.entity";
 import { LocalizedStringGraphQL } from "src/models/course-models";
 import { UnitEntity } from "src/modules/units/entities/unit.entity";
 import { AbstractEntity } from "common/common";
@@ -36,7 +36,7 @@ export class LessonEntity extends AbstractEntity<LessonEntity>  {
   @Field(() => UnitEntity)
   unit: UnitEntity;
 
-  @OneToMany(() => ChallengeEntity, (challenge) => challenge.lesson, { cascade: true })
+  @OneToMany(() => ChallengeEntity, (challenge) => challenge.lesson)
   @Field(() => [ChallengeEntity], { nullable: true })
   challenges: ChallengeEntity[];
 

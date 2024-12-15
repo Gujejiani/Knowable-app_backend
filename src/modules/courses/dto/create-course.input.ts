@@ -8,7 +8,6 @@ export class CreateCourseInput {
   @Field(() => LocalizedStringInput)
   @ValidateNested()
   @Type(() => LocalizedStringInput) 
-
   @IsNotEmpty()
   name: LocalizedStringInput;
 

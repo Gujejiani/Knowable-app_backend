@@ -32,12 +32,12 @@ type OptionEntity {
 
 type ChallengeEntity {
   id: ID!
-  name: String!
-  description: String!
+  name: LocalizedStringGraphQL!
+  description: LocalizedStringGraphQL!
   type: String!
   content: String!
   passingScore: Float
-  question: String!
+  question: LocalizedStringGraphQL!
   lesson: LessonEntity!
   options: [OptionEntity!]
 }

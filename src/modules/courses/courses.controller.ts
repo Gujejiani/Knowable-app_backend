@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { CoursesService } from './courses.service';
-import { CreateCourseDto } from './dto/create-course.dto';
-import { UpdateCourseDto } from './dto/update-course.dto';
+import { CreateCourseDto } from './dto/rest-dto/create-course.dto';
+import { UpdateCourseDto } from './dto/rest-dto/update-course.dto';
 import { ApiTags } from '@nestjs/swagger';  // Import ApiTags decorator
 
 
