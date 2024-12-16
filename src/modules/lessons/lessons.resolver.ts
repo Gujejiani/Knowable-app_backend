@@ -15,7 +15,7 @@ export class LessonsResolver {
 
   @Query(() => [LessonEntity], { name: 'lessons' })
   findAll() {
-    return this.lessonsService.findAll();
+    return this.lessonsService.findAll({challenges: true});
   }
 
   @Query(() => LessonEntity, { name: 'lesson' })

@@ -11,6 +11,7 @@ import { join } from 'path';
 import { LoggingMiddleware } from './middlewares/logging.middleware';
 import { UnitsModule } from './modules/units/units.module';
 import { LessonsModule } from './modules/lessons/lessons.module';
+import { ChallengesModule } from './modules/challenges/challenges.module';
 @Module({
   imports: [
     DatabaseModule,
@@ -18,6 +19,7 @@ import { LessonsModule } from './modules/lessons/lessons.module';
     SectionsModule,
     UnitsModule,
     LessonsModule,
+    ChallengesModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),

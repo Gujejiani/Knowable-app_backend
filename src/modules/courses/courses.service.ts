@@ -1,9 +1,9 @@
 import {  Injectable, Logger } from '@nestjs/common';
-import { UpdateCourseDto } from './dto/update-course.dto';
+import { UpdateCourseDto } from './dto/rest-dto/update-course.dto';
 import { CoursesRepository } from './course.repository';
 import { CourseEntity } from './entities/course.entity';
 import { OnEvent } from '@nestjs/event-emitter';
-import { CreateCourseDto } from './dto/create-course.dto';
+import { CreateCourseDto } from './dto/rest-dto/create-course.dto';
 
 @Injectable()
 export class CoursesService {
@@ -18,7 +18,9 @@ export class CoursesService {
 
  async  findAll(loadRelations = true) {
     const relations = loadRelations
-      ? { sections: { units: { lessons: true } } }
+      ? { sections: { units: { lessons:  {
+        challenges: true
+      } } } }
       : {};
   
     try {

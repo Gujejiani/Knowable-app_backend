@@ -42,7 +42,7 @@ import { IsNotEmpty, IsOptional } from "class-validator";
 @ObjectType()  // Mark this class as a GraphQL Object Type
 
 export class LocalizedStringGraphQL {
-  @Field()  // GraphQL field for English version
+  @Field({ nullable: true })  // GraphQL field for English version
   en: string;
 
   @Field({ nullable: true })  // Optional GraphQL field for Spanish version

@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 type LocalizedStringGraphQL {
-  en: String!
+  en: String
   es: String
 }
 
@@ -34,12 +34,13 @@ type ChallengeEntity {
   id: ID!
   name: LocalizedStringGraphQL!
   description: LocalizedStringGraphQL!
-  type: String!
-  content: String!
+  type: String
+  content: String
   passingScore: Float
-  question: LocalizedStringGraphQL!
+  question: LocalizedStringGraphQL
   lesson: LessonEntity!
   options: [OptionEntity!]
+  lessonId: Float
 }
 
 type LessonEntity {
@@ -112,6 +113,8 @@ type Query {
   unit(id: Int!): UnitEntity!
   lessons: [LessonEntity!]!
   lesson(id: Int!): LessonEntity!
+  challenges: [ChallengeEntity!]!
+  challenge(id: Int!): ChallengeEntity!
 }
 
 type Mutation {
@@ -125,6 +128,9 @@ type Mutation {
   createLesson(createLessonInput: CreateLessonInput!): LessonEntity!
   updateLesson(updateLessonInput: UpdateLessonInput!): LessonEntity!
   removeLesson(id: Int!): LessonEntity!
+  createChallenge(createChallengeInput: CreateChallengeInput!): ChallengeEntity!
+  updateChallenge(updateChallengeInput: UpdateChallengeInput!): ChallengeEntity!
+  removeChallenge(id: Int!): ChallengeEntity!
 }
 
 input CreateCourseInput {
@@ -196,5 +202,26 @@ input UpdateLessonInput {
   createdAt: DateTime
   updatedAt: DateTime
   unitId: Float
+  id: Float!
+}
+
+input CreateChallengeInput {
+  name: LocalizedStringInput!
+  description: LocalizedStringInput!
+  type: String
+  content: String
+  passingScore: Float
+  question: LocalizedStringInput
+  lessonId: Float
+}
+
+input UpdateChallengeInput {
+  name: LocalizedStringInput
+  description: LocalizedStringInput
+  type: String
+  content: String
+  passingScore: Float
+  question: LocalizedStringInput
+  lessonId: Float
   id: Float!
 }
