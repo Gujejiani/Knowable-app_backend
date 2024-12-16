@@ -5,6 +5,7 @@ import {  LessonEntity, } from './entities/lesson.entity';
 import { CreateLessonDto } from './dto/rest-dto/create-lesson.dto';
 import { CreateLessonInput } from './dto/create-lesson.input';
 import { UpdateLessonDto } from './dto/rest-dto/update-lesson.dto';
+import { FindOptionsRelations } from 'typeorm';
 
 @Injectable()
 export class LessonsService {
@@ -23,8 +24,8 @@ export class LessonsService {
     return  this.lessonRepository.create(lessonEntity)
   }
 
-  findAll() {
-    return this.lessonRepository.find({});
+  findAll(relations?: FindOptionsRelations<LessonEntity>) {
+    return this.lessonRepository.find({}, relations);
   }
 
   findOne(id: number) {
