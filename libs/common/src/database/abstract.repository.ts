@@ -8,6 +8,7 @@ export abstract class AbstractRepository<T extends AbstractEntity<T>> {
     protected abstract readonly logger: Logger;
 
 
+    
        constructor(protected readonly entityRepository: Repository<T>,
         private readonly entityManager: EntityManager
  
