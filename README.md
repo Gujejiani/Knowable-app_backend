@@ -24,9 +24,58 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+# Knowable
 
-## Installation
+**Knowable** is a mobile learning application inspired by Duolingo, designed to provide an interactive and fun way to learn a specific topic or skill. This application is currently under development and leverages the following technologies:
+
+## Tech Stack
+
+### Frontend:
+
+- **React Native**: Enables cross-platform compatibility for Android and iOS devices.
+
+### Backend:
+
+- **NestJS**: A robust Node.js framework for scalable backend API development.
+- **GraphQL**: Ensures efficient and flexible communication between the frontend and backend.
+- **TypeORM**: Manages database interactions with an ORM approach.
+- **PostgreSQL**: A relational database for efficient data storage and retrieval.
+
+---
+
+## Project Architecture
+
+The application follows a clean and modular architecture:
+
+1. **Frontend (React Native)**:
+
+   - Serves as the user-facing interface for Android and iOS devices.
+   - Communicates with the backend via GraphQL APIs.
+
+2. **Backend (NestJS)**:
+
+   - Handles business logic and API routing.
+   - Ensures secure and scalable operations.
+   - Integrates with TypeORM for structured database interactions.
+
+3. **Database (PostgreSQL)**:
+   - Stores user data, progress, and application content.
+
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+</p>
+
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
+
+
+## Features
+
+- User authentication and profile management.
+- Cross-platform compatibility (iOS and Android).
+- Interactive and engaging learning modules.
+- Real-time updates and data synchronization.
+- Scalable backend with efficient data handling.
 
 ```bash
 $ npm install
@@ -34,28 +83,27 @@ $ npm install
 
 ## Running the app
 
-```bash
-# development
-$ npm run start
+### Prerequisites
 
-# watch mode
-$ npm run start:dev
+- Node.js (v16 or higher)
+- npm or yarn
+- PostgreSQL (latest version)
 
-# production mode
-$ npm run start:prod
-```
+### Steps to Run Locally
 
-## Test
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/knowable.git
+   ```
 
-```bash
-# unit tests
-$ npm run test
+2.  ``` npm install ```
 
-# e2e tests
-$ npm run test:e2e
+3. ``` npm run start:dev ```
 
-# test coverage
-$ npm run test:cov
+## generating modules
+
+nest g resource <name>
+
 ```
 
 ## Support
@@ -82,7 +130,3 @@ refactor: optimize relationships in <NAME> if it's refactor
 
 
 
-
-## generating modules
-
-nest g resource <name>
