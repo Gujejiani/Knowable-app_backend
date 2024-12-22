@@ -1,40 +1,32 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { CourseEntity } from "../courses/entities/course.entity";
+import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { UserEntity } from "./user.entity";
-import { SectionEntity } from "./section.entity";
-import { UnitEntity } from "./unit.entity";
-import { LessonEntity } from "./lesson.entity";
-import { IStatusEnum } from "src/models";
+import { CourseEntity } from "../modules/courses/entities/course.entity";
 
 @Entity()
+@ObjectType()
 export class UserProgressEntity {
     @PrimaryGeneratedColumn()
+    @Field(() => ID)
     id: number;
 
     @ManyToOne(() => UserEntity, (user) => user.progress)
+    @Field(() => UserEntity)
     user: UserEntity;
 
-    @ManyToOne(() => CourseEntity, (course) => course.userProgress, { nullable: true })
+    @ManyToOne(() => CourseEntity, (course) => course.userProgress)
+    @Field(() => CourseEntity)
     course: CourseEntity;
 
-    @ManyToOne(() => SectionEntity, (section) => section.userProgress, { nullable: true })
-    section: SectionEntity;
+    @Column("int", { array: true, default: () => "'{}'" })
+    @Field(() => [Number], { nullable: true })
+    unlockedSections: number[];
 
-    @ManyToOne(() => UnitEntity, (unit) => unit.userProgress, { nullable: true })
-    unit: UnitEntity;
+    @Column("int", { array: true, default: () => "'{}'" })
+    @Field(() => [Number], { nullable: true })
+    unlockedUnits: number[];
 
-    @ManyToOne(() => LessonEntity, (lesson) => lesson.userProgress, { nullable: true })
-    lesson: LessonEntity;
-
-    @Column({ type: "enum", enum: IStatusEnum, default: IStatusEnum.locked })
-    status: IStatusEnum;
-
-    @Column("int", { array: true, default: () => "'{}'" }) // This creates an integer array
-    completedChallenges: number[]; // Array of completed challenge IDs
-
-    @Column({ type: 'timestamp', nullable: true })
-    unlockedAt: Date;
-
-    @Column({ type: 'timestamp', nullable: true })
-    completedAt: Date;
+    @Column("int", { array: true, default: () => "'{}'" })
+    @Field(() => [Number], { nullable: true })
+    completedLessons: number[];
 }

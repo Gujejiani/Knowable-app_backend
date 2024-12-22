@@ -4,8 +4,10 @@ import { QueryDeepPartialEntity } from "typeorm/query-builder/QueryPartialEntity
 import { AbstractEntity } from "./abstract.entity";
 
 
+
 export abstract class AbstractRepository<T extends AbstractEntity<T>> {
     protected abstract readonly logger: Logger;
+
 
 
        constructor(protected readonly entityRepository: Repository<T>,
@@ -17,7 +19,7 @@ export abstract class AbstractRepository<T extends AbstractEntity<T>> {
 
 
         async create(entity: T): Promise<T> {
-            return this.entityManager.save(entity);
+            return  await this.entityManager.save(entity);
         }
 
 
@@ -30,9 +32,9 @@ export abstract class AbstractRepository<T extends AbstractEntity<T>> {
         async findOne(where: FindOptionsWhere<T>, relations?: FindOptionsRelations<T> ): Promise<T> {
             const entity = await this.entityRepository.findOne({ where, relations });
 
-            if(!entity){
-                throw new NotFoundException('Entity not found')
-            }
+            // if(!entity){
+            //     throw new NotFoundException('Entity not found')
+            // }
 
             
 
@@ -55,9 +57,9 @@ export abstract class AbstractRepository<T extends AbstractEntity<T>> {
 
 
 
-        async find(where: FindOptionsWhere<T>): Promise<T[]>  {
+        async find(where: FindOptionsWhere<T>, relations?: FindOptionsRelations<T> ): Promise<T[]>  {
 
-            return this.entityRepository.find({ where });
+            return this.entityRepository.find({ where, relations});
         }
 
 

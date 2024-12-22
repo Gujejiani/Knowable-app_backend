@@ -1,0 +1,227 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type LocalizedStringGraphQL {
+  en: String
+  es: String
+}
+
+type UserEntity {
+  id: ID!
+  username: String!
+  email: String!
+  progress: [UserProgressEntity!]
+}
+
+type UserProgressEntity {
+  id: ID!
+  user: UserEntity!
+  course: CourseEntity!
+  unlockedSections: [Float!]
+  unlockedUnits: [Float!]
+  completedLessons: [Float!]
+}
+
+type OptionEntity {
+  id: ID!
+  optionText: String!
+  isCorrect: Boolean!
+  challenge: ChallengeEntity!
+}
+
+type ChallengeEntity {
+  id: ID!
+  name: LocalizedStringGraphQL!
+  description: LocalizedStringGraphQL!
+  type: String
+  content: String
+  passingScore: Float
+  question: LocalizedStringGraphQL
+  lesson: LessonEntity!
+  options: [OptionEntity!]
+  lessonId: Float
+}
+
+type LessonEntity {
+  id: ID!
+  name: LocalizedStringGraphQL!
+  description: LocalizedStringGraphQL!
+  imageUrl: String
+  icon: String
+  content: String!
+  unit: UnitEntity!
+  challenges: [ChallengeEntity!]
+  unitId: Float!
+}
+
+type UnitEntity {
+  id: ID!
+  name: LocalizedStringGraphQL!
+  description: LocalizedStringGraphQL!
+  imageUrl: String
+  icon: String
+  count: Float!
+  unitColor: CourseHeaderBackgroundEnum!
+  section: SectionEntity!
+  lessons: [LessonEntity!]
+  sectionId: Float!
+}
+
+"""Enum that represents the background color options for units"""
+enum CourseHeaderBackgroundEnum {
+  Pink
+  LightBlue
+  LightGreen
+  LightCoral
+  Purple
+  Orange
+  Teal
+}
+
+type SectionEntity {
+  id: ID!
+  name: LocalizedStringGraphQL!
+  courseId: Float!
+  course: CourseEntity!
+  units: [UnitEntity!]
+}
+
+type CourseEntity {
+  id: ID!
+  name: LocalizedStringGraphQL!
+  description: LocalizedStringGraphQL!
+  imageUrl: String
+  icon: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  sections: [SectionEntity!]
+  userProgress: [UserProgressEntity!]
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  courses: [CourseEntity!]!
+  course(id: Int!): CourseEntity!
+  sections: [SectionEntity!]!
+  section(id: Int!): SectionEntity!
+  units: [UnitEntity!]!
+  unit(id: Int!): UnitEntity!
+  lessons: [LessonEntity!]!
+  lesson(id: Int!): LessonEntity!
+  challenges: [ChallengeEntity!]!
+  challenge(id: Int!): ChallengeEntity!
+}
+
+type Mutation {
+  createCourse(createCourseInput: CreateCourseInput!): CourseEntity!
+  updateSection(updateSectionInput: UpdateSectionInput!): SectionEntity!
+  removeSection(id: Int!): SectionEntity!
+  createSection(createSectionInput: CreateSectionInput!): SectionEntity!
+  createUnit(createUnitInput: CreateUnitInput!): UnitEntity!
+  updateUnit(updateUnitInput: UpdateUnitInput!): UnitEntity!
+  removeUnit(id: Int!): UnitEntity!
+  createLesson(createLessonInput: CreateLessonInput!): LessonEntity!
+  updateLesson(updateLessonInput: UpdateLessonInput!): LessonEntity!
+  removeLesson(id: Int!): LessonEntity!
+  createChallenge(createChallengeInput: CreateChallengeInput!): ChallengeEntity!
+  updateChallenge(updateChallengeInput: UpdateChallengeInput!): ChallengeEntity!
+  removeChallenge(id: Int!): ChallengeEntity!
+}
+
+input CreateCourseInput {
+  name: LocalizedStringInput!
+  description: LocalizedStringInput!
+  imageUrl: String
+  icon: String
+}
+
+input LocalizedStringInput {
+  en: String!
+  es: String
+}
+
+input UpdateSectionInput {
+  id: Float
+  name: LocalizedStringInput
+  courseId: Float
+  units: [UnitInput!]
+}
+
+input UnitInput {
+  title: String!
+  lessons: [String!]
+}
+
+input CreateSectionInput {
+  name: LocalizedStringInput!
+  courseId: Float!
+  units: [UnitInput!]
+}
+
+input CreateUnitInput {
+  name: LocalizedStringInput!
+  description: LocalizedStringInput!
+  imageUrl: String
+  icon: String
+  count: Float!
+  unitColor: CourseHeaderBackgroundEnum!
+  sectionId: Float!
+}
+
+input UpdateUnitInput {
+  name: LocalizedStringInput
+  description: LocalizedStringInput
+  imageUrl: String
+  icon: String
+  count: Float
+  unitColor: CourseHeaderBackgroundEnum
+  sectionId: Float
+  id: Float
+}
+
+input CreateLessonInput {
+  name: LocalizedStringInput!
+  description: LocalizedStringInput
+  imageUrl: String
+  icon: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  unitId: Float
+}
+
+input UpdateLessonInput {
+  name: LocalizedStringInput
+  description: LocalizedStringInput
+  imageUrl: String
+  icon: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  unitId: Float
+  id: Float!
+}
+
+input CreateChallengeInput {
+  name: LocalizedStringInput!
+  description: LocalizedStringInput!
+  type: String
+  content: String
+  passingScore: Float
+  question: LocalizedStringInput
+  lessonId: Float
+}
+
+input UpdateChallengeInput {
+  name: LocalizedStringInput
+  description: LocalizedStringInput
+  type: String
+  content: String
+  passingScore: Float
+  question: LocalizedStringInput
+  lessonId: Float
+  id: Float!
+}
