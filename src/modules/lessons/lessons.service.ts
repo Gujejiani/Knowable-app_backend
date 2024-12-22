@@ -24,6 +24,12 @@ export class LessonsService {
     return  this.lessonRepository.create(lessonEntity)
   }
 
+  updateRest(id: number, updateLessonInput: UpdateLessonDto) {
+    return this.lessonRepository.findOneAndUpdate({id: id}, 
+      updateLessonInput
+    );
+  }
+
   findAll(relations?: FindOptionsRelations<LessonEntity>) {
     return this.lessonRepository.find({}, relations);
   }
@@ -38,11 +44,7 @@ export class LessonsService {
     );
   }
 
-  updateRest(id: number, updateLessonInput: UpdateLessonDto) {
-    return this.lessonRepository.findOneAndUpdate({id: id}, 
-      updateLessonInput
-    );
-  }
+  
 
   remove(id: number) {
     return this.lessonRepository.findOneAndDelete({ id});

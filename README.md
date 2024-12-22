@@ -79,3 +79,10 @@ chore: update <NAME>  – if it’s a structural update or cleanup.
 feat: add new fields to <NAME>  – if you added new fields.
 fix: correct data types in <NAME>  – if it’s fixing data types or validations.
 refactor: optimize relationships in <NAME> if it's refactor
+
+
+
+
+## generating modules
+
+nest g resource <name>
