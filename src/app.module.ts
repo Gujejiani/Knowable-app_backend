@@ -12,11 +12,13 @@ import { LoggingMiddleware } from './middlewares/logging.middleware';
 import { UnitsModule } from './modules/units/units.module';
 import { LessonsModule } from './modules/lessons/lessons.module';
 import { ChallengesModule } from './modules/challenges/challenges.module';
+import { OptionsModule } from './modules/options/options.module';
 @Module({
   imports: [
     DatabaseModule,
     CoursesModule,
     SectionsModule,
+    OptionsModule,
     UnitsModule,
     LessonsModule,
     ChallengesModule,

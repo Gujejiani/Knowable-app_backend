@@ -27,6 +27,7 @@ type OptionEntity {
   id: ID!
   optionText: String!
   isCorrect: Boolean!
+  order: Float!
   challenge: ChallengeEntity!
 }
 
@@ -109,6 +110,8 @@ type Query {
   course(id: Int!): CourseEntity!
   sections: [SectionEntity!]!
   section(id: Int!): SectionEntity!
+  options: [OptionEntity!]!
+  option(id: Int!): OptionEntity!
   units: [UnitEntity!]!
   unit(id: Int!): UnitEntity!
   lessons: [LessonEntity!]!
@@ -122,6 +125,9 @@ type Mutation {
   updateSection(updateSectionInput: UpdateSectionInput!): SectionEntity!
   removeSection(id: Int!): SectionEntity!
   createSection(createSectionInput: CreateSectionInput!): SectionEntity!
+  createOption(createOptionInput: CreateOptionInput!): OptionEntity!
+  updateOption(updateOptionInput: UpdateOptionInput!): OptionEntity!
+  removeOption(id: Int!): OptionEntity!
   createUnit(createUnitInput: CreateUnitInput!): UnitEntity!
   updateUnit(updateUnitInput: UpdateUnitInput!): UnitEntity!
   removeUnit(id: Int!): UnitEntity!
@@ -161,6 +167,21 @@ input CreateSectionInput {
   name: LocalizedStringInput!
   courseId: Float!
   units: [UnitInput!]
+}
+
+input CreateOptionInput {
+  optionText: String!
+  isCorrect: Boolean!
+  order: Int!
+  challengeId: Int!
+}
+
+input UpdateOptionInput {
+  optionText: String
+  isCorrect: Boolean
+  order: Int
+  challengeId: Int
+  id: Int!
 }
 
 input CreateUnitInput {

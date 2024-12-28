@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { LessonEntity } from "../../lessons/entities/lesson.entity";
-import { OptionEntity } from "../../../entities/options.entity";
+import { OptionEntity } from "../../options/entities/option.entity";
 import { LocalizedStringGraphQL } from "src/models";
 import { AbstractEntity } from "common/common";
 import { IsOptional } from "class-validator";
