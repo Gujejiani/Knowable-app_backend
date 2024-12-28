@@ -3,6 +3,7 @@ import { CreateOptionInput } from './dto/create-option.input';
 import { UpdateOptionInput } from './dto/update-option.input';
 import { OptionsRepository } from './options.repository';
 import { OptionEntity } from './entities/option.entity';
+import { FindOptionsRelations } from 'typeorm';
 
 @Injectable()
 export class OptionsService {
@@ -13,8 +14,8 @@ export class OptionsService {
     return  this.optionsRepository.create(optionEntity);
   }
 
-  findAll() {
-    return this.optionsRepository.find({});
+  findAll(relations?: FindOptionsRelations<OptionEntity>) {
+    return this.optionsRepository.find({}, relations);
   }
 
   findOne(id: number) {

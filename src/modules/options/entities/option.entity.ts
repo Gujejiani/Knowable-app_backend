@@ -26,4 +26,9 @@ export class OptionEntity extends AbstractEntity<OptionEntity> {
   @ManyToOne(() => ChallengeEntity, (challenge) => challenge.options)
   @Field(() => ChallengeEntity)
   challenge: ChallengeEntity;
+
+  @Column({nullable: true})
+  @Field()
+  challengeId: number;
+
 }

@@ -130,3 +130,8 @@ refactor: optimize relationships in <NAME> if it's refactor
 
 
 
+
+
+#Retrieving nested data => graphql
+
+in entity services we can pass relations object to find all method to retrieve nested relations as well => for now it used in course graphql resolver to have ability retrieve whole content of the specific course

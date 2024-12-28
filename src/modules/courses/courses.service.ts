@@ -19,7 +19,9 @@ export class CoursesService {
  async  findAll(loadRelations = true) {
     const relations = loadRelations
       ? { sections: { units: { lessons:  {
-        challenges: true
+        challenges: {
+          options: true
+        }
       } } } }
       : {};
   
