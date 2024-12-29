@@ -7,28 +7,13 @@ type LocalizedStringGraphQL {
   es: String
 }
 
-type UserEntity {
-  id: ID!
-  username: String!
-  email: String!
-  progress: [UserProgressEntity!]
-}
-
-type UserProgressEntity {
-  id: ID!
-  user: UserEntity!
-  course: CourseEntity!
-  unlockedSections: [Float!]
-  unlockedUnits: [Float!]
-  completedLessons: [Float!]
-}
-
 type OptionEntity {
   id: ID!
   optionText: String!
   isCorrect: Boolean!
   order: Float!
   challenge: ChallengeEntity!
+  challengeId: Float!
 }
 
 type ChallengeEntity {
@@ -88,6 +73,47 @@ type SectionEntity {
   units: [UnitEntity!]
 }
 
+type UserEntity {
+  id: ID!
+  username: String!
+  email: String!
+  progress: [UserProgressEntity!]
+}
+
+type UnlockedSection {
+  id: Float!
+  unlockedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type UnlockedUnit {
+  id: Float!
+  progress: Float!
+  unlockedAt: DateTime!
+}
+
+type CompletedLesson {
+  id: Float!
+  completedAt: DateTime!
+}
+
+type UserProgressEntity {
+  id: ID!
+  user: UserEntity!
+  course: CourseEntity!
+  progressPercentage: Float!
+  unlockedSections: [UnlockedSection!]
+  unlockedUnits: [UnlockedUnit!]
+  completedLessons: [CompletedLesson!]
+  updatedAt: DateTime!
+  courseId: Float!
+  userId: Float!
+}
+
 type CourseEntity {
   id: ID!
   name: LocalizedStringGraphQL!
@@ -99,11 +125,6 @@ type CourseEntity {
   sections: [SectionEntity!]
   userProgress: [UserProgressEntity!]
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type Query {
   courses: [CourseEntity!]!
@@ -118,6 +139,8 @@ type Query {
   lesson(id: Int!): LessonEntity!
   challenges: [ChallengeEntity!]!
   challenge(id: Int!): ChallengeEntity!
+  GetAllUserProgress: [UserProgressEntity!]!
+  userProgress(id: Int!): UserProgressEntity!
 }
 
 type Mutation {
@@ -137,6 +160,9 @@ type Mutation {
   createChallenge(createChallengeInput: CreateChallengeInput!): ChallengeEntity!
   updateChallenge(updateChallengeInput: UpdateChallengeInput!): ChallengeEntity!
   removeChallenge(id: Int!): ChallengeEntity!
+  createUserProgress(createUserProgressInput: CreateUserProgressInput!): UserProgressEntity!
+  updateUserProgress(updateUserProgressInput: UpdateUserProgressInput!): UserProgressEntity!
+  removeUserProgress(id: Int!): UserProgressEntity!
 }
 
 input CreateCourseInput {
@@ -181,7 +207,7 @@ input UpdateOptionInput {
   isCorrect: Boolean
   order: Int
   challengeId: Int
-  id: Int!
+  id: Float!
 }
 
 input CreateUnitInput {
@@ -244,5 +270,42 @@ input UpdateChallengeInput {
   passingScore: Float
   question: LocalizedStringInput
   lessonId: Float
+  id: Float!
+}
+
+input CreateUserProgressInput {
+  userId: Int!
+  courseId: Int!
+  progressPercentage: Int! = 0
+  unlockedSections: [UnlockedSectionInput!]
+  unlockedUnits: [UnlockedUnitInput!]
+  completedLessons: [CompletedLessonInput!]
+  updatedAt: DateTime
+}
+
+input UnlockedSectionInput {
+  id: Float!
+  unlockedAt: DateTime!
+}
+
+input UnlockedUnitInput {
+  id: Float!
+  progress: Float!
+  unlockedAt: DateTime!
+}
+
+input CompletedLessonInput {
+  id: Float!
+  completedAt: DateTime!
+}
+
+input UpdateUserProgressInput {
+  userId: Int
+  courseId: Int
+  progressPercentage: Int = 0
+  unlockedSections: [UnlockedSectionInput!]
+  unlockedUnits: [UnlockedUnitInput!]
+  completedLessons: [CompletedLessonInput!]
+  updatedAt: DateTime
   id: Float!
 }

@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { UserProgressEntity } from './UserProgress.entity';
+import { UserProgressEntity } from "src/modules/user-progress/entities/user-progress.entity";
 
 @Entity()
 @ObjectType() // This decorator is crucial for making this class available to the GraphQL schema

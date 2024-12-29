@@ -13,6 +13,7 @@ import { UnitsModule } from './modules/units/units.module';
 import { LessonsModule } from './modules/lessons/lessons.module';
 import { ChallengesModule } from './modules/challenges/challenges.module';
 import { OptionsModule } from './modules/options/options.module';
+import { UserProgressModule } from './modules/user-progress/user-progress.module';
 @Module({
   imports: [
     DatabaseModule,
@@ -22,6 +23,7 @@ import { OptionsModule } from './modules/options/options.module';
     UnitsModule,
     LessonsModule,
     ChallengesModule,
+    UserProgressModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
