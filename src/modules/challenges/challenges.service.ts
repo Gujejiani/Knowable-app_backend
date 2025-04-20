@@ -12,8 +12,8 @@ export class ChallengesService {
 
   constructor(private readonly challengesRepository: ChallengeRepository){}
   create(createChallengeInput: CreateChallengeInput) {
-    const challangeEntity =  new ChallengeEntity(createChallengeInput);
-    return this.challengesRepository.create(challangeEntity);
+    const challengeEntity =  new ChallengeEntity(createChallengeInput);
+    return this.challengesRepository.create(challengeEntity);
   }
 
   

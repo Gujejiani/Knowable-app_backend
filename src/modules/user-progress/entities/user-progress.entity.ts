@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { UserEntity } from "src/entities/user.entity";
+import { UserEntity } from "src/modules/users/entities/user.entity";
 import { CourseEntity } from "src/modules/courses/entities/course.entity";
 import { AbstractEntity } from "common/common";
 import { CompletedLesson, UnlockedSection, UnlockedUnit } from "../models/progress-graphql.helper";

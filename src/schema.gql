@@ -141,6 +141,8 @@ type Query {
   challenge(id: Int!): ChallengeEntity!
   GetAllUserProgress: [UserProgressEntity!]!
   userProgress(id: Int!): UserProgressEntity!
+  users: [UserEntity!]!
+  user(id: Int!): UserEntity!
 }
 
 type Mutation {
@@ -163,6 +165,9 @@ type Mutation {
   createUserProgress(createUserProgressInput: CreateUserProgressInput!): UserProgressEntity!
   updateUserProgress(updateUserProgressInput: UpdateUserProgressInput!): UserProgressEntity!
   removeUserProgress(id: Int!): UserProgressEntity!
+  createUser(createUserInput: CreateUserInput!): UserEntity!
+  updateUser(updateUserInput: UpdateUserInput!): UserEntity!
+  removeUser(id: Int!): UserEntity!
 }
 
 input CreateCourseInput {
@@ -307,5 +312,16 @@ input UpdateUserProgressInput {
   unlockedUnits: [UnlockedUnitInput!]
   completedLessons: [CompletedLessonInput!]
   updatedAt: DateTime
+  id: Float!
+}
+
+input CreateUserInput {
+  username: String!
+  email: String!
+}
+
+input UpdateUserInput {
+  username: String
+  email: String
   id: Float!
 }
