@@ -1,6 +1,6 @@
 import { IsOptional, IsObject, IsNumber } from 'class-validator';
 import { UnitInputRestDto } from './createSectionDto';
-import { LocalizedString } from 'src/models';
+import { CourseHeaderBackgroundEnum, LocalizedString } from 'src/models';
 
 
 export class UpdateSectionDto {
@@ -18,4 +18,8 @@ export class UpdateSectionDto {
 
   @IsOptional()
   units?: UnitInputRestDto[];
+
+  @IsOptional()
+  sectionColor:  CourseHeaderBackgroundEnum | null;
+
 }

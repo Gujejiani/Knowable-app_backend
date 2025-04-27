@@ -49,6 +49,7 @@ type UnitEntity {
   icon: String
   count: Float!
   unitColor: CourseHeaderBackgroundEnum!
+  status: IStatusEnum
   section: SectionEntity!
   lessons: [LessonEntity!]
   sectionId: Float!
@@ -65,11 +66,20 @@ enum CourseHeaderBackgroundEnum {
   Teal
 }
 
+"""Enum that represents the status of a user progress"""
+enum IStatusEnum {
+  locked
+  unlocked
+  completed
+}
+
 type SectionEntity {
   id: ID!
   name: LocalizedStringGraphQL!
   courseId: Float!
+  description: LocalizedStringGraphQL!
   course: CourseEntity!
+  sectionColor: CourseHeaderBackgroundEnum
   units: [UnitEntity!]
 }
 
@@ -187,6 +197,7 @@ input UpdateSectionInput {
   name: LocalizedStringInput
   courseId: Float
   units: [UnitInput!]
+  sectionColor: CourseHeaderBackgroundEnum
 }
 
 input UnitInput {
@@ -198,6 +209,7 @@ input CreateSectionInput {
   name: LocalizedStringInput!
   courseId: Float!
   units: [UnitInput!]
+  sectionColor: CourseHeaderBackgroundEnum
 }
 
 input CreateOptionInput {
@@ -223,6 +235,7 @@ input CreateUnitInput {
   count: Float!
   unitColor: CourseHeaderBackgroundEnum!
   sectionId: Float!
+  status: IStatusEnum
 }
 
 input UpdateUnitInput {
@@ -233,6 +246,7 @@ input UpdateUnitInput {
   count: Float
   unitColor: CourseHeaderBackgroundEnum
   sectionId: Float
+  status: IStatusEnum
   id: Float
 }
 

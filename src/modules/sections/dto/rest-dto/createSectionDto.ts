@@ -1,6 +1,6 @@
-import { IsNotEmpty, IsNumber, IsOptional, IsArray, ValidateNested } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsArray, ValidateNested, IsEnum } from 'class-validator';
 import { Type } from 'class-transformer';
-import { LocalizedString } from 'src/models';
+import { CourseHeaderBackgroundEnum, LocalizedString } from 'src/models';
 
 export class CreateSectionRestDto {
   @IsNotEmpty()
@@ -15,6 +15,10 @@ export class CreateSectionRestDto {
   @ValidateNested({ each: true })
   @Type(() => UnitInputRestDto)
   units?: UnitInputRestDto[];
+
+  @IsOptional() 
+  @IsEnum(CourseHeaderBackgroundEnum)
+  sectionColor?: CourseHeaderBackgroundEnum | null; 
 }
 
 export class UnitInputRestDto {

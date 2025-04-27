@@ -1,6 +1,6 @@
 import { Entity, Column, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { CourseEntity } from "../../courses/entities/course.entity";
-import {  LocalizedStringGraphQL } from "src/models/course-models";
+import {  CourseBackground, CourseHeaderBackgroundEnum, LocalizedStringGraphQL } from "src/models/course-models";
 import { Field, ID, ObjectType } from "@nestjs/graphql";
 import { AbstractEntity } from "common/common";
 import { UnitEntity } from "src/modules/units/entities/unit.entity";
@@ -23,9 +23,17 @@ export class SectionEntity extends AbstractEntity<SectionEntity> {
   @Field()
   courseId: number; 
 
+  @Column("jsonb")
+  @Field(() => LocalizedStringGraphQL)
+  description: LocalizedStringGraphQL;
+
   @ManyToOne(() => CourseEntity, (course) => course.sections)
   @Field(() => CourseEntity)
   course: CourseEntity;
+
+  @Column({ type: "enum", enum: CourseHeaderBackgroundEnum, nullable: true, default: null }) 
+  @Field(() => CourseHeaderBackgroundEnum, { nullable: true})
+  sectionColor: CourseBackground  | null;
 
   @OneToMany(() => UnitEntity, (unit) => unit.section)
   @Field(() => [UnitEntity], { nullable: true })

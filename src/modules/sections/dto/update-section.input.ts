@@ -1,7 +1,7 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { UnitInput } from './create-section.input';
-import { LocalizedStringInput } from 'src/models';
-import { ValidateNested, IsOptional } from 'class-validator';
+import { CourseHeaderBackgroundEnum, LocalizedStringInput } from 'src/models';
+import { ValidateNested, IsOptional, IsEnum } from 'class-validator';
 import { Type } from 'class-transformer';
 
 @InputType()
@@ -25,4 +25,9 @@ export class UpdateSectionInput {
   @Type(() => UnitInput)
   @IsOptional()
   units?: UnitInput[];
+
+  @Field(() => CourseHeaderBackgroundEnum, { nullable: true })
+  @IsOptional()
+  @IsEnum(CourseHeaderBackgroundEnum)
+  sectionColor?: CourseHeaderBackgroundEnum | null;
 }

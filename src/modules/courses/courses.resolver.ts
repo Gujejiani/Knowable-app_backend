@@ -26,7 +26,7 @@ export class CoursesResolver {
 
   @Query(() => CourseEntity, { name: 'course' })
   findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.coursesService.findOne(id);
+    return this.coursesService.findOne(id, true);
   }
 
   @Mutation(() => CourseEntity)

@@ -12,6 +12,7 @@ registerEnumType(IStatusEnum, {
   description: 'Enum that represents the status of a user progress',
 })
 
+export type  IStatus = IStatusEnum;
 
 
 export type CourseBackground = CourseHeaderBackgroundEnum;

@@ -1,25 +1,30 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { ValidateNested, IsNotEmpty, IsOptional } from 'class-validator';
+import { ValidateNested, IsNotEmpty, IsOptional, IsEnum } from 'class-validator';
 import { Type } from 'class-transformer';
-import { LocalizedStringInput } from 'src/models';
+import { CourseHeaderBackgroundEnum, LocalizedStringInput } from 'src/models';
 
 @InputType()
 export class CreateSectionInput {
   @Field(() => LocalizedStringInput)
-  @ValidateNested() // Validate nested objects
-  @Type(() => LocalizedStringInput) // Transform plain object to LocalizedStringInput
-  @IsNotEmpty() // Validate that name is not empty
+  @ValidateNested()
+  @Type(() => LocalizedStringInput)
+  @IsNotEmpty()
   name: LocalizedStringInput;
 
   @Field()
-  @IsNotEmpty() // Validate that courseId is provided
+  @IsNotEmpty() 
   courseId: number;
 
   @Field(() => [UnitInput], { nullable: true })
-  @ValidateNested({ each: true }) // Validate each unit in the array
-  @Type(() => UnitInput) // Transform plain objects into UnitInput instances
-  @IsOptional() // units are optional
+  @ValidateNested({ each: true }) 
+  @Type(() => UnitInput) 
+  @IsOptional() 
   units?: UnitInput[];
+
+  @Field(() => CourseHeaderBackgroundEnum, { nullable: true }) 
+  @IsOptional()
+  @IsEnum(CourseHeaderBackgroundEnum) 
+  sectionColor?: CourseHeaderBackgroundEnum | null; 
 }
 
 

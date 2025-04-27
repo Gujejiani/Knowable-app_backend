@@ -34,8 +34,16 @@ export class CoursesService {
     }
   }
 
-  findOne(id: number) {
-    return this.courseRepository.findOne({ id: id });
+  findOne(id: number, loadRelations = false) {
+    const relations = loadRelations
+    ? { sections: { units: { lessons:  {
+      challenges: {
+        options: true
+      }
+    } } } }
+    : {};
+
+    return this.courseRepository.findOne({ id: id,  }, relations);
   }
 
   update(id: number, updateCourseDto: UpdateCourseDto) {

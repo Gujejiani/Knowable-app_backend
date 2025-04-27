@@ -1,4 +1,4 @@
-import { CourseBackground, CourseHeaderBackgroundEnum, LocalizedStringGraphQL } from "src/models/course-models";
+import { CourseBackground, CourseHeaderBackgroundEnum, IStatus, IStatusEnum, LocalizedStringGraphQL } from "src/models/course-models";
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 
@@ -36,6 +36,11 @@ export class UnitEntity extends AbstractEntity<UnitEntity> {
   @Column({ type: "enum", enum: CourseHeaderBackgroundEnum })
   @Field(() => CourseHeaderBackgroundEnum)
   unitColor: CourseBackground;
+
+  // todo make not nullable
+  @Column({ type: "enum", enum: IStatusEnum, nullable: true, default: null }) 
+  @Field(() => IStatusEnum, { nullable: true})
+  status: IStatus  | null;
 
   @ManyToOne(() => SectionEntity, (section) => section.units)
   @Field(() => SectionEntity)

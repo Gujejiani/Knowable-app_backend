@@ -1,5 +1,5 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { LocalizedStringInput } from 'src/models/course-models';
+import { IStatus, IStatusEnum, LocalizedStringInput } from 'src/models/course-models';
 import { CourseHeaderBackgroundEnum } from 'src/models/course-models';
 import { ValidateNested, IsOptional, IsNotEmpty } from 'class-validator';
 import { Type } from 'class-transformer';
@@ -37,5 +37,11 @@ export class CreateUnitInput {
   @Field()
   @IsNotEmpty()
   sectionId: number;
+
+  @Field(() => IStatusEnum, { nullable: true })  
+  @IsOptional()  
+  status: IStatus | null;  
+
+  
 }
 
